@@ -1,17 +1,36 @@
-const express = require('express');
+import express from "express";
+import cors from "cors";
+import mysql from "mysql2/promise";
 
-const app = express();
-
-const port = 3000;
-
-app.get('/', (req, res) => {
-
-res.send('Hello from Node.js Backend!');
-
+// ================================
+// DB接続設定
+// ================================
+const db = await mysql.createConnection({
+    host: 'localhost',
+    user: 'user556',
+    password: '0922',
+    database: 'mw'
 });
 
-app.listen(port, () => {
+// ================================
+// Express 設定
+// ================================
+const app = express();
+app.use(cors());
+app.use(express.json());
 
-console.log(`Backend listening at http://localhost:${port}`);
+// ================================
+// 動作確認用ルート
+// ================================
+app.get("/", (req, res) => {
+    res.send("Music Werewolf API is running!");
+});
 
+
+// ================================
+// サーバー起動
+// ================================
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
 });
