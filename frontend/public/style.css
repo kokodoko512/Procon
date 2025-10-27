@@ -1,0 +1,83 @@
+body {
+  margin: 0;
+  font-family: "Noto Sans JP", sans-serif;
+  background-color: #111;
+  color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: auto;
+  position: relative;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background: #e55b5b;
+  color: black;              /* ← 文字色 */
+  font-family: "fantasy"; /* ← 字体 */
+  font-size: 18px;           /* ← 文字の大きさ */
+  font-weight: bold; 
+}
+
+button[data-action="increase"],
+button[data-action="decrease"]  {
+    padding: 8px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    background: #f986ba;
+    color: black;              /* ← 文字色 */
+    font-family: "fantasy"; /* ← 字体 */
+    font-size: 14px;           /* ← 文字の大きさ */
+    font-weight: bold; 
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center; /* 横方向中央 */
+  align-items: center;     /* 縦方向中央 */
+  height: 100vh;           /* 高さを画面全体にする */
+}
+
+
+.create-btn {
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: 8px;
+  background-color: #e55b5b;
+  color: black;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="text"]{
+    width: 92%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.back-link {
+  display: inline-block;
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-size: 1.2rem;
+  color: whitesmoke; /* お好みで変更 */
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline; /* ホバーで下線 */
+}
+      
+.actions {
+  margin-top: 40px; /* ← ここで下にスペースを作る */
+}
