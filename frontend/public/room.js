@@ -63,10 +63,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ← 仮データ（MySQL接続前の擬似データ）
   const mockPlayers = [
-    { user_id: 1, name: "プレイヤー１", theme_name: "失恋" },
-    { user_id: 2, name: "プレイヤー２", theme_name: "順調な恋" },
-    { user_id: 3, name: "プレイヤー３", theme_name: "順調な恋" },
-    { user_id: 4, name: "プレイヤー４", theme_name: "順調な恋" }
+    { user_id: 1, name: "プレイヤー１", theme_name: "失恋" ,wolf: true},
+    { user_id: 2, name: "プレイヤー２", theme_name: "順調な恋" ,wolf: false},
+    { user_id: 3, name: "プレイヤー３", theme_name: "順調な恋" ,wolf: false},
+    { user_id: 4, name: "プレイヤー４", theme_name: "順調な恋" ,wolf: false}
   ];
 
       form.addEventListener("submit", (e) => {
@@ -84,7 +84,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return{
             user_id: index + 1,
             name: name || `プレイヤー${index + 1}`,
-            theme_name: mockPlayers[index]?.theme_name || "未設定"
+            theme_name: mockPlayers[index]?.theme_name || "未設定",
+            wolf: mockPlayers[index]?.wolf || false
         };
     });
 

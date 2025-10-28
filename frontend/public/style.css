@@ -1,83 +1,144 @@
+/* 全体 */
 body {
   margin: 0;
   font-family: "Noto Sans JP", sans-serif;
-  background-color: #111;
+  background: linear-gradient(135deg, #111, #333);
   color: white;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: flex-start;
-  overflow: auto;
-  position: relative;
+  align-items: center;
 }
 
-button {
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  background: #e55b5b;
-  color: black;              /* ← 文字色 */
-  font-family: "fantasy"; /* ← 字体 */
-  font-size: 18px;           /* ← 文字の大きさ */
-  font-weight: bold; 
+/* タイトル */
+h1 {
+  margin: 60px 0 40px; /* 上40px→60px、下20px→40pxに調整して距離確保 */
+  font-size: 3rem;
+  color: #ff6b6b;
+  text-shadow: 0 0 12px rgba(255, 107, 107, 0.7);
 }
 
-button[data-action="increase"],
-button[data-action="decrease"]  {
-    padding: 8px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    background: #f986ba;
-    color: black;              /* ← 文字色 */
-    font-family: "fantasy"; /* ← 字体 */
-    font-size: 14px;           /* ← 文字の大きさ */
-    font-weight: bold; 
-}
-
+/* ルーム作成ボタン */
 .button-wrapper {
   display: flex;
-  justify-content: center; /* 横方向中央 */
-  align-items: center;     /* 縦方向中央 */
-  height: 100vh;           /* 高さを画面全体にする */
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 140px); /* タイトル分マージン調整 */
 }
-
 
 .create-btn {
-  padding: 12px 24px;
-  font-size: 18px;
-  border-radius: 8px;
-  background-color: #e55b5b;
-  color: black;
+  padding: 20px 40px;       /* 以前より大きく */
+  font-size: 2rem;          /* フォントサイズアップ */
+  border-radius: 16px;      /* 角丸を少し大きく */
+  background-color: #ff4757; /* 鮮やかレッドに変更 */
+  color: white;             /* 文字を白に */
   border: none;
   cursor: pointer;
+  box-shadow: 0 8px 20px rgba(255, 71, 87, 0.5);
+  transition: all 0.3s ease;
 }
 
+.create-btn:hover {
+  background-color: #ff2e44;
+  transform: translateY(-4px); /* 少し浮き上がる感じ */
+  box-shadow: 0 10px 25px rgba(255, 46, 68, 0.6);
+}
+
+.create-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
+}
+
+/* 入力欄 */
 input[type="text"]{
-    width: 92%;
-    padding: 8px;
-    margin: 8px 0;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-    font-size: 14px;
+  width: 90%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s;
 }
 
+input[type="text"]:focus {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+}
+
+/* 戻るリンク */
 .back-link {
   display: inline-block;
   position: absolute;
   top: 16px;
   left: 16px;
   font-size: 1.2rem;
-  color: whitesmoke; /* お好みで変更 */
+  color: whitesmoke;
   text-decoration: none;
 }
-
 .back-link:hover {
-  text-decoration: underline; /* ホバーで下線 */
+  text-decoration: underline;
 }
-      
+
+/* 投票行 */
+.vote-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0;
+}
+
+.player-name {
+  width: 130px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.vote-count {
+  width: 28px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* ＋−ボタン */
+button.increase,
+button.decrease {
+  width: 36px;
+  height: 36px;
+  font-size: 20px;
+  font-weight: bold;
+  background: #ff6b6b;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+
+button.increase:hover,
+button.decrease:hover {
+  background: #ff4d4d;
+  transform: translateY(-2px);
+}
+button { 
+    padding: 10px; 
+    border: none; 
+    border-radius: 4px; 
+    top: 14px;
+    cursor: pointer; 
+    background: #e55b5b; 
+    color: black; /* ← 文字色 */ 
+    font-family: "fantasy"; /* ← 字体 */ 
+    font-size: 18px; /* ← 文字の大きさ */ 
+    font-weight: bold; 
+}
+
 .actions {
-  margin-top: 40px; /* ← ここで下にスペースを作る */
+  margin-top: 40px; /* 👈 ここで距離を調整 */
+  margin-bottom: 60px; /* 👈 下にも余白を追加 */
+  text-align: center;
 }

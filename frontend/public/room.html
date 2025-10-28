@@ -14,9 +14,17 @@
     </header> 
     <main id="player-setting" role="main" aria-labelledby="page-title">
         <h1 id="page-title">プレイヤー設定</h1>
-
+        <p id="players-genre" class="sr-only">ジャンルを選択してください。</p>
+        <select id="theme-select" aria-label="ジャンル選択">
+            <option value="">ジャンル選択</option>
+            <option value="失恋">失恋</option>
+            <option value="片思い">片思い</option>
+            <option value="友情">友情</option>
+            <option value="夢・挑戦">夢・挑戦</option>
+            <option value="楽しい気分">楽しい気分</option>
+        </select>
         <section class="player-setting" role="main" aria-labelledby="page-title">
-            <h2 id="players-count-heading">～人数～</h2>
+            <h3 id="players-count-heading">～人数～</h3>
 
             <div class="count-control" role="group" aria-label="プレイヤー人数の操作">
               <button type="button" data-action="decrease" class="button" aria-label="人数を減らす">◀</button>
@@ -26,7 +34,7 @@
         </section>
 
         <form id="players-form" action="#" method="post" aria-describedby="players-help">
-            <p id="players-help" class="sr-only">各プレイヤー名を入力してください。</p>
+            <p id="players-help" class="sr-only">プレイヤーの名前を入力してください。</p>
 
             <fieldset class="play-list" aria-label="プレイヤー一覧">
                 <div class="player-row" data-index="1">
@@ -71,7 +79,7 @@
                 </div> 
             </fieldset>
             <div class="actions">
-             <center><button type="submit" aria-label="ゲームへ進む">ゲームへ</button></center>
+             <center><button type="submit" aria-label="ゲームへ進む">ゲーム開始</button></center>
         </form>
     </main>
 <script src=room.js></script>
