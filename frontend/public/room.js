@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         playerList.appendChild(newRow);
       }
     } else if (count < currentRows) {
-      // 末尾から削除（上部は消えない）
+      // 末尾から削除
       const rowsToRemove = currentRows - count;
       for (let i = 0; i < rowsToRemove; i++) {
         const row = rows[rows.length - 1 - i];
@@ -61,43 +61,54 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ← 仮データ（MySQL接続前の擬似データ）
-  const mockPlayers = [
-    { user_id: 1, name: "プレイヤー１", theme_name: "失恋" },
-    { user_id: 2, name: "プレイヤー２", theme_name: "順調な恋" },
-    { user_id: 3, name: "プレイヤー３", theme_name: "順調な恋" },
-    { user_id: 4, name: "プレイヤー４", theme_name: "順調な恋" }
-  ];
+  // 🎯 フォーム送信イベント
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-      form.addEventListener("submit", (e) => {
-         e.preventDefault();
+    const playerInputs = document.querySelectorAll(".player-row input[type='text']");
+    let allFilled = true;
 
-    // すべてのプレイヤー名入力欄を取得
-        const playerInputs = document.querySelectorAll(".player-row input[type='text']");
-        let allFilled = true;
+    const players = Array.from(playerInputs).map((input, index) => {
+      const name = input.value.trim();
+      if (!name) allFilled = false;
 
-            
-        const updatedPlayers = Array.from(playerInputs).map((input, index) => {
-        const name = input.value.trim();
-        if (!name) allFilled = false;
-
-        return{
-            user_id: index + 1,
-            name: name || `プレイヤー${index + 1}`,
-            theme_name: mockPlayers[index]?.theme_name || "未設定"
-        };
+      return {
+        user_id: index + 1,
+        name: name || `プレイヤー${index + 1}`,
+        theme_name: "未設定"
+      };
     });
 
     if (!allFilled) {
-       alert("全てのプレイヤー名を入力してください！");
-       return; // 送信中止
+      alert("全てのプレイヤー名を入力してください！");
+      return;
     }
 
+    try {
+      // 🔥 Node.js サーバーに送信
+      const responses = await Promise.all(
+        players.map(async (player) => {
+          const res = await fetch("http://localhost:3000/api/players", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: player.name })
+          });
+          if (!res.ok) throw new Error(`登録失敗: ${player.name}`);
+          return res.json();
+        })
+      );
 
-    // localStorage に保存
-    localStorage.setItem("players", JSON.stringify(updatedPlayers));
+      console.log("登録成功:", responses);
 
-    // すべて入力済みなら画面遷移
-    window.location.href = "../check.html";
-    });
+      // 💾 localStorage に保存（既存処理）
+      localStorage.setItem("players", JSON.stringify(players));
+
+      // ✅ 次の画面へ遷移
+      window.location.href = "../check.html";
+
+    } catch (error) {
+      console.error("通信エラー:", error);
+      alert("サーバーとの通信に失敗しました。");
+    }
+  });
 });
