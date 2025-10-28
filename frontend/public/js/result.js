@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tr = document.createElement("tr");
 
     if (player.wolf) {
-      tr.style.backgroundColor = "#ffcccc"; // 人狼は赤系
+      tr.style.backgroundColor = "#f9b2b2ff"; // 人狼は赤系
       tr.style.color = "#000000"; 
       tr.style.fontWeight = "bold";
     } else {
