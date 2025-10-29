@@ -61,44 +61,47 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ← 仮データ（MySQL接続前の擬似データ）
-  const mockPlayers = [
-    { user_id: 1, name: "プレイヤー１", theme_name: "失恋" ,wolf: true},
-    { user_id: 2, name: "プレイヤー２", theme_name: "順調な恋" ,wolf: false},
-    { user_id: 3, name: "プレイヤー３", theme_name: "順調な恋" ,wolf: false},
-    { user_id: 4, name: "プレイヤー４", theme_name: "順調な恋" ,wolf: false}
-  ];
+  // 🎯 プレイヤー登録（バックエンド連携）
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-      form.addEventListener("submit", (e) => {
-         e.preventDefault();
+    const playerInputs = document.querySelectorAll(".player-row input[type='text']");
+    const playerNames = Array.from(playerInputs).map((input, i) => input.value.trim() || `プレイヤー${i + 1}`);
 
-    // すべてのプレイヤー名入力欄を取得
-        const playerInputs = document.querySelectorAll(".player-row input[type='text']");
-        let allFilled = true;
-
-            
-        const updatedPlayers = Array.from(playerInputs).map((input, index) => {
-        const name = input.value.trim();
-        if (!name) allFilled = false;
-
-        return{
-            user_id: index + 1,
-            name: name || `プレイヤー${index + 1}`,
-            theme_name: mockPlayers[index]?.theme_name || "未設定",
-            wolf: mockPlayers[index]?.wolf || false
-        };
-    });
-
-    if (!allFilled) {
-       alert("全てのプレイヤー名を入力してください！");
-       return; // 送信中止
+    // 空欄チェック
+    if (playerNames.some(name => name === "")) {
+      alert("全てのプレイヤー名を入力してください！");
+      return;
     }
 
+    try {
+      // 🔄 ゲームデータをリセットしておく（DB初期化）
+      await fetch("http://localhost:3000/api/reset-game", {
+        method: "POST"
+      });
 
-    // localStorage に保存
-    localStorage.setItem("players", JSON.stringify(updatedPlayers));
+      // 🔹 各プレイヤーを順に登録
+      const registeredPlayers = [];
+      for (const name of playerNames) {
+        const res = await fetch("http://localhost:3000/api/players", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name })
+        });
 
-    // すべて入力済みなら画面遷移
-    window.location.href = "../check.html";
-    });
+        if (!res.ok) throw new Error("プレイヤー登録に失敗");
+        const player = await res.json();
+        registeredPlayers.push(player);
+      }
+
+      // 🧠 ローカルストレージにも保存（次画面用）
+      localStorage.setItem("players", JSON.stringify(registeredPlayers));
+
+      // ✅ 次の画面へ
+      window.location.href = "../check.html";
+    } catch (err) {
+      console.error("登録エラー:", err);
+      alert("プレイヤー登録中にエラーが発生しました。サーバーを確認してください。");
+    }
+  });
 });
