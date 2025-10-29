@@ -9,7 +9,7 @@ dotenv.config();
 
 // DB接続設定
 const db = await mysql.createConnection({
-    host: 'localhost',
+    host: '192.168.10.3',
     user: 'user556',
     password: '0922',
     database: 'mw'
@@ -272,7 +272,7 @@ app.get("/api/spotify/search", async (req, res) => {
         }
 
         const token = await getSpotifyToken();
-        const searchUrl = `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=5`;
+        const searchUrl = `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=10`;
 
         const response = await fetch(searchUrl, {
             headers: { "Authorization": `Bearer ${token}` }
@@ -286,6 +286,7 @@ app.get("/api/spotify/search", async (req, res) => {
             title: item.name,
             artist: item.artists.map(a => a.name).join(", "),
             album: item.album.name,
+            album_image: item.album.images[0]?.url || null,
             preview_url: item.preview_url
         }));
 
