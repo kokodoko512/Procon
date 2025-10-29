@@ -118,35 +118,23 @@ app.get("/api/players", (req, res) => {
 
 
 // API:5.人狼決定
-app.post("/api/wolf", async (req, res) => {
+app.post("/api/wolf", (req, res) => {
     if (players.length === 0) {
         return res.status(400).json({ error: "プレイヤー未登録" });
     }
 
-    try {
-        // 全員を市民(false)に設定
-        players.forEach(p => p.wolf = false);
+    // 市民(false)に初期化
+    players.forEach(p => p.wolf = false);
 
-        // ランダムで一人人狼(true)に設定
-        const randomIndex = Math.floor(Math.random() * players.length);
-        players[randomIndex].wolf = true;
+    // ランダムで一人人狼(true)に設定
+    const randomIndex = Math.floor(Math.random() * players.length);
+    players[randomIndex].wolf = true;
 
-        // DB に反映
-        for (const p of players) {
-            await db.execute("UPDATE PLAYER SET wolf = ? WHERE player_id = ?", [p.wolf, p.player_id]);
-        }
-
-        res.json({
-            message: "人狼決定",
-            players
-        });
-
-    } catch (err) {
-        console.error("DB更新エラー:", err);
-        res.status(500).json({ error: "人狼決定失敗" });
-    }
+    res.json({
+        message: "人狼決定",
+        players
+    });
 });
-
 
 
 // API:6.テーマ割り当て
@@ -284,7 +272,7 @@ app.get("/api/spotify/search", async (req, res) => {
         }
 
         const token = await getSpotifyToken();
-        const searchUrl = `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=10`;
+        const searchUrl = `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=5`;
 
         const response = await fetch(searchUrl, {
             headers: { "Authorization": `Bearer ${token}` }
@@ -298,7 +286,6 @@ app.get("/api/spotify/search", async (req, res) => {
             title: item.name,
             artist: item.artists.map(a => a.name).join(", "),
             album: item.album.name,
-            album_image: item.album.images[0]?.url || null,
             preview_url: item.preview_url
         }));
 
