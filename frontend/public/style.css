@@ -45,6 +45,10 @@ h1 {
   box-shadow: 0 10px 25px rgba(255, 46, 68, 0.6);
 }
 
+.create-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
+}
 
 /* 入力欄 */
 input[type="text"]{
