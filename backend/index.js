@@ -9,7 +9,7 @@ dotenv.config();
 
 // DB接続設定
 const db = await mysql.createConnection({
-    host: 'localhost',
+    host: '192.168.10.3',
     user: 'user556',
     password: '0922',
     database: 'mw'
