@@ -118,23 +118,35 @@ app.get("/api/players", (req, res) => {
 
 
 // API:5.人狼決定
-app.post("/api/wolf", (req, res) => {
+app.post("/api/wolf", async (req, res) => {
     if (players.length === 0) {
         return res.status(400).json({ error: "プレイヤー未登録" });
     }
 
-    // 市民(false)に初期化
-    players.forEach(p => p.wolf = false);
+    try {
+        // 全員を市民(false)に設定
+        players.forEach(p => p.wolf = false);
 
-    // ランダムで一人人狼(true)に設定
-    const randomIndex = Math.floor(Math.random() * players.length);
-    players[randomIndex].wolf = true;
+        // ランダムで一人人狼(true)に設定
+        const randomIndex = Math.floor(Math.random() * players.length);
+        players[randomIndex].wolf = true;
 
-    res.json({
-        message: "人狼決定",
-        players
-    });
+        // DB に反映
+        for (const p of players) {
+            await db.execute("UPDATE PLAYER SET wolf = ? WHERE player_id = ?", [p.wolf, p.player_id]);
+        }
+
+        res.json({
+            message: "人狼決定",
+            players
+        });
+
+    } catch (err) {
+        console.error("DB更新エラー:", err);
+        res.status(500).json({ error: "人狼決定失敗" });
+    }
 });
+
 
 
 // API:6.テーマ割り当て

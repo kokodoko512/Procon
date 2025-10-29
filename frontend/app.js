@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const app = express();
-const port = 5173;
+const port = 3000;
 
 // __dirnameを定義（ESモジュール対応）
 const __filename = fileURLToPath(import.meta.url);
