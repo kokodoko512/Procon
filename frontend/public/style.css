@@ -103,27 +103,14 @@ input[type="text"]:focus {
 }
 
 /* ＋−ボタン */
-button.increase,
-button.decrease {
-  width: 36px;
-  height: 36px;
-  font-size: 20px;
-  font-weight: bold;
+button[data-action="increase"],
+button[data-action="decrease"] {
+  font-size: 10px;
   background: #ff6b6b;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: 0.2s;
+  color: #111;
 }
 
-button.increase:hover,
-button.decrease:hover {
-  background: #ff4d4d;
-  transform: translateY(-2px);
-}
+
 button { 
     padding: 10px; 
     border: none; 
@@ -131,11 +118,19 @@ button {
     top: 14px;
     cursor: pointer; 
     background: #e55b5b; 
-    color: black; /* ← 文字色 */ 
+    color: white; /* ← 文字色 */ 
     font-family: "fantasy"; /* ← 字体 */ 
     font-size: 18px; /* ← 文字の大きさ */ 
     font-weight: bold; 
+    transition: all 0.3s ease;
 }
+
+button:hover {
+  background-color: #ff2e44;
+  transform: translateY(-2px); /* 少し浮き上がる感じ */
+  box-shadow: 0 10px 25px rgba(255, 46, 68, 0.6);
+}
+
 
 .actions {
   margin-top: 40px; /* 👈 ここで距離を調整 */
