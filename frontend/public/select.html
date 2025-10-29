@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>曲選択画面</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>操作画面</h1>
+  <h2 id="theme"></h2>
+
+  <!-- 検索欄 -->
+  <div>
+    <center>
+      <input type="text" id="search" placeholder="曲名またはアーティスト名を入力">
+      <button id="search-btn">検索</button>
+    </center>
+</div>
+
+  <!-- 検索結果表示 -->
+  <div id="search-results"></div>
+  <button id="load-more" style="display:none;">もっと見る</button>
+
+  <script src="js/select.js"></script>
+</body>
+</html>
