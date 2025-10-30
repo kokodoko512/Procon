@@ -10,7 +10,7 @@ dotenv.config();
 // DB接続設定
 // =========================
 const db = await mysql.createConnection({
-    host: "192.168.10.3",
+    host: "localhost",
     user: "user556",
     password: "0922",
     database: "mw",
@@ -127,7 +127,7 @@ app.post("/api/wolf", async (req, res) => {
         players[randomIndex].wolf = true;
 
         for (const p of players) {
-        await db.execute("UPDATE PLAYER SET wolf = ? WHERE player_id = ?", [p.wolf, p.player_id]);
+            await db.execute("UPDATE PLAYER SET wolf = ? WHERE player_id = ?", [p.wolf, p.player_id]);
         }
 
         res.json({ message: "人狼決定", players });
@@ -166,36 +166,38 @@ app.post("/api/post-theme", (req, res) => {
 // =========================
 app.get("/api/result", async (req, res) => {
     try {
-        if (players.length === 0) {
-        return res.status(404).json({ message: "プレイヤー未登録" });
-        }
+        const [rows] = await db.execute(`
+        SELECT 
+            p.player_id,
+            p.name,
+            p.wolf,
+            s.title,
+            s.youtube_id,
+            s.album_image
+        FROM PLAYER p
+        LEFT JOIN SONG s ON p.song_id = s.song_id
+        ORDER BY p.player_id
+        `);
 
-        const results = [];
-        for (const p of players) {
-        let songData = null;
-
-        if (p.song_id) {
-            const [rows] = await db.query("SELECT title, youtube_id, album_image FROM SONG WHERE song_id = ?", [p.song_id]);
-            songData = rows[0] || null;
-        }
-
-        results.push({
-            player_id: p.player_id,
-            name: p.name,
-            wolf: p.wolf,
-            theme_name: p.theme_name,
-            title: songData?.title || null,
-            youtube_id: songData?.youtube_id || null,
-            album_image: songData?.album_image || null,
+        // players 配列（メモリ上に保持している前提）からテーマ名を結合
+        // players がグローバルに存在する前提
+        const results = rows.map(player => {
+        const memPlayer = players.find(p => p.player_id === player.player_id);
+        return {
+            ...player,
+            theme_name: memPlayer ? memPlayer.theme_name : null
+        };
         });
-        }
 
         res.json(results);
+
     } catch (error) {
         console.error("DBエラー:", error);
         res.status(500).json({ message: "結果取得失敗" });
     }
 });
+
+
 
 // =========================
 // 8. ゲーム初期化
@@ -234,9 +236,9 @@ app.get("/api/youtube/search", async (req, res) => {
         const data = await response.json();
 
         const videos = data.items.map((item) => ({
-        youtube_id: item.id.videoId,
-        title: item.snippet.title,
-        album_image: item.snippet.thumbnails.medium.url,
+            youtube_id: item.id.videoId,
+            title: item.snippet.title,
+            album_image: item.snippet.thumbnails.medium.url,
         }));
 
         res.json(videos);
@@ -259,16 +261,19 @@ app.post("/api/youtube/register-song", async (req, res) => {
     try {
         // 曲を登録
         const [result] = await db.execute(
-        "INSERT INTO SONG (youtube_id, title, album_image) VALUES (?, ?, ?)",
-        [youtube_id, title, album_image]
+            "INSERT INTO SONG (youtube_id, title, album_image) VALUES (?, ?, ?)",
+            [youtube_id, title, album_image]
         );
 
         const songId = result.insertId;
 
         // プレイヤーに紐づけ
-        await db.execute("UPDATE PLAYER SET song_id = ? WHERE player_id = ?", [songId, player_id]);
+        await db.execute(
+            "UPDATE PLAYER SET song_id = ? WHERE player_id = ?",
+            [songId, player_id]
+        );
 
-        res.json({ message: "YouTube曲登録完了", song_id: songId });
+        res.json({ message: "曲登録完了", song_id: songId });
     } catch (error) {
         console.error("登録エラー:", error);
         res.status(500).json({ error: "登録失敗" });

@@ -91,10 +91,10 @@ async function fetchVideos(isLoadMore = false) {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                player_id: currentPlayer.player_id,
-                youtube_id: videoId,
-                title: title,
-                album_image: thumbnail
+                    player_id: currentPlayer.player_id,
+                    youtube_id: videoId,
+                    title: title,
+                    album_image: thumbnail
                 }),
             });
 
