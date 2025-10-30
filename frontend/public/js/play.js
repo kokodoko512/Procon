@@ -58,7 +58,6 @@ function playSong(index) {
   const song = songs[currentIndex];
   player.loadVideoById(song.youtube_id);
   updateNowPlaying(song);
-  document.getElementById("next-btn").style.display = "none"; // 再生開始時に隠す
 }
 
 // 再生中タイトル更新
@@ -74,8 +73,7 @@ function onPlayerStateChange(event) {
     if (currentIndex < playlist.length) {
       playSong(currentIndex);
     } else {
-      document.getElementById("now-playing").textContent = "🎵 全曲再生が終了しました。";
-      document.getElementById("next-btn").style.display = "block"; // ボタン表示
+      document.getElementById("now-playing").textContent = "全曲再生が終了しました。";
     }
   }
 }
