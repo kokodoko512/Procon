@@ -11,7 +11,7 @@ async function loadCurrentPlayer() {
 
         currentPlayer = players[currentIndex];
 
-        if (!currentPlayer) {
+        if (!currentPlayer || currentIndex >= players.length) {
             alert("プレイヤー情報が見つかりません");
             return null;
         }
@@ -28,8 +28,9 @@ async function loadCurrentPlayer() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    loadCurrentPlayer();
+document.addEventListener("DOMContentLoaded", async () => {
+    const currentPlayer = await loadCurrentPlayer();
+    if(!currentPlayer) return;
 });
 
 document.getElementById("yes-button").addEventListener("click", () => {
