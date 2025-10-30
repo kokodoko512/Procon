@@ -297,4 +297,6 @@ app.get("/api/youtube/songs", async (req, res) => {
 // サーバー起動
 // =========================
 const PORT = 3000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});

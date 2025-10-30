@@ -1,16 +1,39 @@
+let currentPlayer = null;
+let currentIndex = 0; // ←グローバルに宣言
 
-const urlParams = new URLSearchParams(window.location.search);
-let currentIndex = parseInt(urlParams.get("player")) || 0;
+async function loadCurrentPlayer() {
+    const urlParams = new URLSearchParams(window.location.search);
+    currentIndex = parseInt(urlParams.get("player")) || 0; // ←ここで代入
 
-const players = JSON.parse(localStorage.getItem("players") || "[]");
+    try {
+        const res = await fetch("http://localhost:3000/api/players");
+        const players = await res.json();
 
-const currentPlayer = players[currentIndex];
+        currentPlayer = players[currentIndex];
 
-const playerName = currentPlayer?.name || `プレイヤー${currentIndex+1}`;
+        if (!currentPlayer || currentIndex >= players.length) {
+            alert("プレイヤー情報が見つかりません");
+            return null;
+        }
 
-document.getElementById("player-question").textContent = `${playerName}さんですか？`;
+        const playerName = currentPlayer.name;
+        document.getElementById("player-question").textContent = `${playerName}さんですか？`;
+
+        return currentPlayer;
+
+    } catch (err) {
+        console.error(err);
+        alert("プレイヤー情報の取得に失敗しました");
+        return [];
+    }
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+    const currentPlayer = await loadCurrentPlayer();
+    if(!currentPlayer) return;
+});
 
 document.getElementById("yes-button").addEventListener("click", () => {
-    // page1.html に現在のプレイヤーを渡す
+    // currentIndex はグローバルなのでここで使える
     window.location.href = `select.html?player=${currentIndex}`;
 });

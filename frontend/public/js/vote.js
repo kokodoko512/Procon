@@ -1,9 +1,22 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const voteList = document.getElementById("vote-list");
   const finishBtn = document.getElementById("finish-vote");
 
-  // 👥 プレイヤーデータを取得
-  const players = JSON.parse(localStorage.getItem("players") || "[]");
+  let players = [];
+  try {
+    // 👥 DBからプレイヤー一覧取得
+    const res = await fetch("http://localhost:3000/api/players");
+    players = await res.json();
+
+    if (!players || players.length === 0) {
+      alert("プレイヤー情報が取得できません");
+      return;
+    }
+  } catch (err) {
+    console.error(err);
+    alert("プレイヤー情報の取得に失敗しました");
+    return;
+  }
 
   // 🧮 投票数を格納（初期値0）
   const votes = new Array(players.length).fill(0);
@@ -75,18 +88,15 @@ const updateUI = () => {
     // 👑 最も票が多いプレイヤーを特定
     const maxVotes = Math.max(...votes);
     const wolfIndex = votes.indexOf(maxVotes);
-    const wolfId = players[wolfIndex].user_id;
+    const wolfId = players[wolfIndex].player_id;
     console.log("投票で最多票のプレイヤー:", wolfId);
 
     // 🐺 実際の人狼を探す
     const realWolf = players.find(p => p.wolf === true);
     console.log("本物の人狼:", realWolf);
-    const realWolfId = realWolf ? realWolf.user_id : null;
+    const realWolfId = realWolf ? realWolf.player_id : null;
 
-    // 🧠 結果を保存
-    localStorage.setItem("wolf_id", wolfId);
-    localStorage.setItem("votes", JSON.stringify(votes));
-
+    
     // 🎯 勝敗判定と遷移
     if (wolfId === realWolfId) {
       window.location.href = "citizen_win.html";
