@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const res = await fetch("http://localhost:3000/api/result");
     const players = await res.json();
 
-    console.log("取得データ:", players); // ← 確認用
+    console.log("取得データ:", players); // 確認用
 
     if (!Array.isArray(players) || players.length === 0) {
       alert("プレイヤー情報が取得できません");
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       tdTheme.textContent = player.theme_name || "—";
 
       const wolfTd = document.createElement("td");
-      wolfTd.textContent = player.wolf ? "🧟‍♀️ 人狼" : "🐏 市民";
+      wolfTd.textContent = player.wolf ? "🐺 人狼" : "🐏 市民";
 
       tr.appendChild(tdName);
       tr.appendChild(tdSongName);
@@ -60,7 +60,7 @@ async function restartGame() {
     const data = await res.json();
     console.log(data.message);
 
-    // ローカルストレージも消去
+    // ローカルストレージ削除
     localStorage.clear();
 
     // room.htmlに遷移

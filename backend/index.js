@@ -6,15 +6,17 @@ import fetch from "node-fetch";
 
 dotenv.config();
 
+
 // =========================
 // DB接続設定
 // =========================
 const db = await mysql.createConnection({
-    host: "localhost",
+    host: "192.168.10.3",
     user: "user556",
     password: "0922",
     database: "mw",
 });
+
 
 // =========================
 // Express設定
@@ -23,6 +25,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
 // =========================
 // 動作確認
 // =========================
@@ -30,9 +33,12 @@ app.get("/", (req, res) => {
     res.send("Music Werewolf API is running!");
 });
 
+
 // =========================
-// 1. ジャンル一覧取得
+// API設定
 // =========================
+
+// 1.ジャンル一覧取得
 app.get("/api/genres", async (req, res) => {
     try {
         const [rows] = await db.execute("SELECT genre_id, genre_name FROM GENRE");
@@ -43,9 +49,7 @@ app.get("/api/genres", async (req, res) => {
     }
 });
 
-// =========================
-// 2. テーマランダム取得
-// =========================
+// 2.テーマランダム取得
 let currentTheme = null;
 
 app.get("/api/theme", async (req, res) => {
@@ -55,15 +59,15 @@ app.get("/api/theme", async (req, res) => {
         const params = [];
 
         if (genreId) {
-        sql += " WHERE genre_id = ?";
-        params.push(genreId);
+            sql += " WHERE genre_id = ?";
+            params.push(genreId);
         }
 
         sql += " ORDER BY RAND() LIMIT 1";
         const [rows] = await db.execute(sql, params);
 
         if (rows.length === 0) {
-        return res.status(404).json({ message: "テーマなし" });
+            return res.status(404).json({ message: "テーマなし" });
         }
 
         currentTheme = rows[0];
@@ -74,9 +78,7 @@ app.get("/api/theme", async (req, res) => {
     }
 });
 
-// =========================
-// 3. プレイヤー登録
-// =========================
+// 3.プレイヤー登録
 let players = [];
 let nextPlayerId = 1;
 
@@ -91,11 +93,11 @@ app.post("/api/players", async (req, res) => {
         const [result] = await db.execute("INSERT INTO PLAYER (name) VALUES (?)", [name]);
 
         const newPlayer = {
-        player_id: result.insertId,
-        name,
-        wolf: null,
-        theme_name: null,
-        song_id: null,
+            player_id: result.insertId,
+            name,
+            wolf: null,
+            theme_name: null,
+            song_id: null,
         };
 
         players.push(newPlayer);
@@ -106,16 +108,12 @@ app.post("/api/players", async (req, res) => {
     }
 });
 
-// =========================
-// 4. プレイヤー一覧取得
-// =========================
+// 4.プレイヤー一覧取得
 app.get("/api/players", (req, res) => {
     res.json(players);
 });
 
-// =========================
-// 5. 人狼決定
-// =========================
+// 5.人狼決定
 app.post("/api/wolf", async (req, res) => {
     if (players.length === 0) {
         return res.status(400).json({ error: "プレイヤー未登録" });
@@ -137,9 +135,7 @@ app.post("/api/wolf", async (req, res) => {
     }
 });
 
-// =========================
-// 6. テーマ割り当て
-// =========================
+// 6.テーマ割り当て
 app.post("/api/post-theme", (req, res) => {
     if (!currentTheme) {
         return res.status(400).json({ error: "テーマ未選択" });
@@ -161,32 +157,29 @@ app.post("/api/post-theme", (req, res) => {
     });
 });
 
-// =========================
-// 7. 結果表示
-// =========================
+// 7.結果表示
 app.get("/api/result", async (req, res) => {
     try {
         const [rows] = await db.execute(`
-        SELECT 
-            p.player_id,
-            p.name,
-            p.wolf,
-            s.title,
-            s.youtube_id,
-            s.album_image
-        FROM PLAYER p
-        LEFT JOIN SONG s ON p.song_id = s.song_id
-        ORDER BY p.player_id
+            SELECT 
+                p.player_id,
+                p.name,
+                p.wolf,
+                s.title,
+                s.youtube_id,
+                s.album_image
+            FROM PLAYER p
+            LEFT JOIN SONG s ON p.song_id = s.song_id
+            ORDER BY p.player_id
         `);
 
-        // players 配列（メモリ上に保持している前提）からテーマ名を結合
-        // players がグローバルに存在する前提
+        // players 配列からテーマ名を結合
         const results = rows.map(player => {
-        const memPlayer = players.find(p => p.player_id === player.player_id);
-        return {
-            ...player,
-            theme_name: memPlayer ? memPlayer.theme_name : null
-        };
+            const memPlayer = players.find(p => p.player_id === player.player_id);
+            return {
+                ...player,
+                theme_name: memPlayer ? memPlayer.theme_name : null
+            };
         });
 
         res.json(results);
@@ -197,11 +190,7 @@ app.get("/api/result", async (req, res) => {
     }
 });
 
-
-
-// =========================
-// 8. ゲーム初期化
-// =========================
+// 8.ゲーム初期化
 app.post("/api/reset-game", async (req, res) => {
     try {
         await db.execute("DELETE FROM SONG");
@@ -219,9 +208,12 @@ app.post("/api/reset-game", async (req, res) => {
     }
 });
 
-// ===========================
+
+// =========================
+// YouTubeAPI設定
+// =========================
+
 // YouTube検索API
-// ===========================
 app.get("/api/youtube/search", async (req, res) => {
     const query = req.query.q;
     if (!query) return res.status(400).json({ error: "検索ワードを指定してください" });
@@ -248,9 +240,7 @@ app.get("/api/youtube/search", async (req, res) => {
     }
 });
 
-// ===========================
 // 曲登録API
-// ===========================
 app.post("/api/youtube/register-song", async (req, res) => {
     const { player_id, youtube_id, title, album_image } = req.body;
 
@@ -280,16 +270,14 @@ app.post("/api/youtube/register-song", async (req, res) => {
     }
 });
 
-// ===========================
 // 登録順に曲を取得
-// ===========================
 app.get("/api/youtube/songs", async (req, res) => {
     try {
         const [songs] = await db.query(`
-        SELECT s.youtube_id, s.title, s.album_image, p.name AS player_name
-        FROM PLAYER p
-        JOIN SONG s ON p.song_id = s.song_id
-        ORDER BY p.player_id
+            SELECT s.youtube_id, s.title, s.album_image, p.name AS player_name
+            FROM PLAYER p
+            JOIN SONG s ON p.song_id = s.song_id
+            ORDER BY p.player_id
         `);
         res.json(songs);
     } catch (error) {
@@ -297,6 +285,7 @@ app.get("/api/youtube/songs", async (req, res) => {
         res.status(500).json({ error: "取得失敗" });
     }
 });
+
 
 // =========================
 // サーバー起動
