@@ -1,123 +1,123 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>人狼の勝利！</title>
-  <style>
-    body {
-      background: radial-gradient(circle at center, #1a0000 0%, #000000 100%);
-      font-family: "Noto Sans JP", sans-serif;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      text-align: center;
-      animation: fadeIn 1.2s ease-in-out;
-    }
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人狼の勝利！</title>
+    <style>
+      body {
+        background: radial-gradient(circle at center, #1a0000 0%, #000000 100%);
+        font-family: "Noto Sans JP", sans-serif;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        text-align: center;
+        animation: fadeIn 1.2s ease-in-out;
+      }
 
-    .emoji {
-      font-size: 5rem;
-      margin-top: 2rem;
-      animation: pulse 1.8s ease-in-out infinite;
-    }
+      .emoji {
+        font-size: 5rem;
+        margin-top: 2rem;
+        animation: pulse 1.8s ease-in-out infinite;
+      }
 
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.1); opacity: 0.8; }
-    }
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.1); opacity: 0.8; }
+      }
 
-    h1 {
-      font-size: 3rem;
-      margin: 1rem 0 0.5rem 0;
-      color: #ff4d4d;
-      text-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
-    }
+      h1 {
+        font-size: 3rem;
+        margin: 1rem 0 0.5rem 0;
+        color: #ff4d4d;
+        text-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+      }
 
-    p {
-      font-size: 1.3rem;
-      margin-bottom: 2rem;
-      color: #f2f2f2;
-    }
+      p {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        color: #f2f2f2;
+      }
 
-    table {
-      width: 90%;
-      max-width: 700px;
-      margin: 0 auto 2rem auto;
-      border-collapse: collapse;
-      text-align: center;
-      background-color: rgba(0,0,0,0.6);
-      overflow: hidden;
-      box-shadow: 0 0 15px rgba(255,0,0,0.4);
-    }
+      table {
+        width: 90%;
+        max-width: 700px;
+        margin: 0 auto 2rem auto;
+        border-collapse: collapse;
+        text-align: center;
+        background-color: rgba(0,0,0,0.6);
+        overflow: hidden;
+        box-shadow: 0 0 15px rgba(255,0,0,0.4);
+      }
 
-    th, td {
-      border: 1px solid #ff4d4d;
-      padding: 12px;
-      font-size: 1rem;
-    }
+      th, td {
+        border: 1px solid #ff4d4d;
+        padding: 12px;
+        font-size: 1rem;
+      }
 
-    th {
-      background-color: rgba(255, 0, 0, 0.7);
-    }
+      th {
+        background-color: rgba(255, 0, 0, 0.7);
+      }
 
-    tbody tr:nth-child(even) {
-      background-color: rgba(255, 255, 255, 0.05);
-    }
+      tbody tr:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
 
-    tbody tr:hover {
-      background-color: rgba(255, 255, 255, 0.15);
-    }
+      tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+      }
 
-    .btn {
-      background-color: #ff4d4d;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      padding: 0.8rem 2rem;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
-      margin-bottom: 2rem;
-    }
+      .btn {
+        background-color: #ff4d4d;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 0.8rem 2rem;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
+        margin-bottom: 2rem;
+      }
 
-    .btn:hover {
-      background-color: #cc0000;
-      transform: translateY(-2px);
-    }
+      .btn:hover {
+        background-color: #cc0000;
+        transform: translateY(-2px);
+      }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
-  </style>
-</head>
-<body>
-  <div class="emoji">🐺</div>
-  <h1>人狼の勝利！</h1>
-  <p>人狼が最後まで正体を隠し通しました…</p>
+      @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="emoji">🐺</div>
+    <h1>人狼の勝利！</h1>
+    <p>人狼が最後まで正体を隠し通しました…</p>
 
-  <table>
-    <thead>
-      <tr>
-        <th>プレイヤー名</th>
-        <th>選んだ曲名</th>
-        <th>テーマ</th>
-        <th>人狼</th>
-      </tr>
-    </thead>
-    <tbody id="players-result">
-      <!-- result.jsで生成 -->
-    </tbody>
-  </table>
+    <table>
+      <thead>
+        <tr>
+          <th>プレイヤー名</th>
+          <th>選んだ曲名</th>
+          <th>テーマ</th>
+          <th>人狼</th>
+        </tr>
+      </thead>
+      <tbody id="players-result">
+        <!-- result.jsで生成 -->
+      </tbody>
+    </table>
 
-  <button class="btn" onclick="restartGame()">もう一度プレイする</button>
+    <button class="btn" onclick="restartGame()">もう一度プレイする</button>
 
-  <script src="js/result.js"></script>
-</body>
+    <script src="js/result.js"></script>
+  </body>
 </html>

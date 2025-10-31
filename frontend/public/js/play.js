@@ -87,7 +87,7 @@ document.getElementById("play-all-btn").addEventListener("click", () => {
   }
 });
 
-// 「人狼当てへ」ボタン押下時に vote.html へ遷移
+// 「人狼当てへ」ボタン押下時 vote.html へ遷移
 document.getElementById("next-btn").addEventListener("click", () => {
   window.location.href = "vote.html";
 });

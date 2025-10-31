@@ -1,9 +1,9 @@
 let currentPlayer = null;
-let currentIndex = 0; // ←グローバルに宣言
+let currentIndex = 0;
 
 async function loadCurrentPlayer() {
     const urlParams = new URLSearchParams(window.location.search);
-    currentIndex = parseInt(urlParams.get("player")) || 0; // ←ここで代入
+    currentIndex = parseInt(urlParams.get("player")) || 0;
 
     try {
         const res = await fetch("http://localhost:3000/api/players");
@@ -23,7 +23,7 @@ async function loadCurrentPlayer() {
 
     } catch (err) {
         console.error(err);
-        alert("プレイヤー情報の取得に失敗しました");
+        alert("プレイヤー情報取得失敗");
         return [];
     }
 }
@@ -34,6 +34,5 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 document.getElementById("yes-button").addEventListener("click", () => {
-    // currentIndex はグローバルなのでここで使える
     window.location.href = `select.html?player=${currentIndex}`;
 });
