@@ -52,6 +52,7 @@
         background-color: rgba(0,0,0,0.1);
         overflow: hidden;
         box-shadow: 0 0 15px rgba(0,128,0,0.3);
+        table-layout: fixed; /* 列幅を固定して整列 */
       }
 
       th, td {
@@ -59,12 +60,39 @@
         padding: 12px;
         font-size: 1rem;
         color: #222;
+        overflow: hidden;
+      }
+
+      /* 折り返しを許可する列（プレイヤー名・曲名・テーマ） */
+      td:nth-child(1),
+      td:nth-child(2),
+      td:nth-child(3) {
+        white-space: normal; /* 折り返し許可 */
+        overflow-wrap: anywhere; /* 長い単語も折り返し */
+        text-overflow: unset; /* 省略無効 */
+      }
+
+      /* 人狼列のみコンパクトで整った表示 */
+      th:nth-child(4),
+      td:nth-child(4) {
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
 
       th {
         background-color: rgba(44,122,44,0.7);
         color: #fff;
       }
+
+      /* 各列の幅調整 */
+      th:nth-child(1),
+      td:nth-child(1) { width: 13%; }  /* プレイヤー名 */
+      th:nth-child(2),
+      td:nth-child(2) { width: 55%; }  /* 曲名 */
+      th:nth-child(3),
+      td:nth-child(3) { width: 20%; }  /* テーマ */
+      th:nth-child(4),
+      td:nth-child(4) { width: 12%; }  /* 人狼 */
 
       tbody tr:nth-child(even) {
         background-color: rgba(255, 255, 255, 0.05);
