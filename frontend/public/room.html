@@ -1,79 +1,81 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ルーム設定</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-    <nav aria-label="ページ操作">
-      <a href="/" class="back-link" aria-label="戻る">&lt;戻る</a>
-    </nav>
-  </header> 
-  <main id="player-setting" role="main" aria-labelledby="page-title">
-    <h1 id="page-title">プレイヤー設定</h1>
-    <p id="players-genre" class="sr-only">ジャンルを選択してください。</p>
-    <select id="theme-select">
-      <option value="">ジャンル選択</option>
-    </select>
-    <section class="player-setting" role="main" aria-labelledby="page-title">
-      <h3 id="players-count-heading">～人数～</h3>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ルーム設定</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <nav aria-label="ページ操作">
+        <a href="/" class="back-link" aria-label="戻る">&lt;戻る</a>
+      </nav>
+    </header> 
+    <main id="player-setting" role="main" aria-labelledby="page-title">
+      <h1 id="page-title">プレイヤー設定</h1>
+      <h3 id="players-count-heading">～ジャンル選択～</h3>
+      <p id="players-genre" class="sr-only">ジャンルを選択してください。</p>
+      <select id="theme-select">
+        <option value="">ジャンル選択</option>
+      </select>
+      <section class="player-setting" role="main" aria-labelledby="page-title">
+        <h3 id="players-count-heading">～人数～</h3>
 
-      <div class="count-control" role="group" aria-label="プレイヤー人数の操作">
-        <button type="button" data-action="decrease" class="button" aria-label="人数を減らす">◀</button>
-        <span class="count" id="player-count" role="status" aria-live="polite" data-count="4">4</span>
-        <button type="button" data-action="increase" class="button" aria-label="人数を増やす">▶</button>
-      </div>
-    </section>
-
-    <form id="players-form" action="#" method="post" aria-describedby="players-help">
-      <p id="players-help" class="sr-only">プレイヤーの名前を入力してください。</p>
-
-      <fieldset class="play-list" aria-label="プレイヤー一覧">
-        <div class="player-row" data-index="1">
-          
-          <label for="player-1" class="sr-only">プレイヤー1</label>
-          <input
-            id="player-1"
-            name="player-1"
-            type="text"
-            placeholder="プレイヤー1"
-            maxlength="30"
-            aria-required="true"
-          />
+        <div class="count-control" role="group" aria-label="プレイヤー人数の操作">
+          <button type="button" data-action="decrease" class="button" aria-label="人数を減らす">◀</button>
+          <span class="count" id="player-count" role="status" aria-live="polite" data-count="4">4</span>
+          <button type="button" data-action="increase" class="button" aria-label="人数を増やす">▶</button>
         </div>
+      </section>
 
-        <div class="player-row" data-index="2">
-          <label for="player-2" class="sr-only">プレイヤー2</label>
-          <input
-            id="player-2"
-            name="player-2"
-            type="text"
-            placeholder="プレイヤー2"
-            maxlength="30"
-            aria-required="true"
-          />
-        </div>
+      <form id="players-form" action="#" method="post" aria-describedby="players-help">
+        <p id="players-help" class="sr-only">プレイヤーの名前を入力してください。</p>
 
-        <div class="player-row" data-index="3">
-          
-          <label for="player-3" class="sr-only">プレイヤー3</label>
-          <input
-              id="player-3"
-              name="player-3"
+        <fieldset class="play-list" aria-label="プレイヤー一覧">
+          <div class="player-row" data-index="1">
+            
+            <label for="player-1" class="sr-only">プレイヤー1</label>
+            <input
+              id="player-1"
+              name="player-1"
               type="text"
-              placeholder="プレイヤー3"
+              placeholder="プレイヤー1"
               maxlength="30"
               aria-required="true"
-          />
+            />
+          </div>
 
-        </div> 
-      </fieldset>
-      <div class="actions">
-        <center><button type="submit" aria-label="ゲームへ進む">ゲーム開始</button></center>
-    </form>
-  </main>
-<script src=js/room.js></script>
-</body>
+          <div class="player-row" data-index="2">
+            <label for="player-2" class="sr-only">プレイヤー2</label>
+            <input
+              id="player-2"
+              name="player-2"
+              type="text"
+              placeholder="プレイヤー2"
+              maxlength="30"
+              aria-required="true"
+            />
+          </div>
+
+          <div class="player-row" data-index="3">
+            
+            <label for="player-3" class="sr-only">プレイヤー3</label>
+            <input
+                id="player-3"
+                name="player-3"
+                type="text"
+                placeholder="プレイヤー3"
+                maxlength="30"
+                aria-required="true"
+            />
+
+          </div> 
+        </fieldset>
+        <div class="actions">
+          <center><button type="submit" aria-label="ゲームへ進む">ゲーム開始</button></center>
+      </form>
+    </main>
+    <script src=js/room.js></script>
+  </body>
+</html>
