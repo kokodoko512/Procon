@@ -6,7 +6,7 @@ async function loadCurrentPlayer() {
     currentIndex = parseInt(urlParams.get("player")) || 0;
 
     try {
-        const res = await fetch("http://localhost:3000/api/players");
+        const res = await fetch("http://10.75.63.165:3000/api/players");
         const players = await res.json();
 
         currentPlayer = players[currentIndex];

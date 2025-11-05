@@ -227,3 +227,13 @@ button:hover {
   transform: translate(-50%, 0);
   pointer-events: auto;
 }
+
+#theme{
+  text-align: center;
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+
+#search-btn{
+  margin-top: 2rem;
+}
