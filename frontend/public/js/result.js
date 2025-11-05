@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       tdTheme.textContent = player.theme_name || "—";
 
       const wolfTd = document.createElement("td");
-      wolfTd.textContent = player.wolf ? "🐺 人狼" : "🐏 市民";
+      wolfTd.textContent = player.wolf ? "人狼" : "市民";
 
       tr.appendChild(tdName);
       tr.appendChild(tdSongName);

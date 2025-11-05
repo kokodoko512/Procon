@@ -1,11 +1,17 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  const helpBtn = document.getElementById("help-btn");
+  const helpBubble = document.getElementById("help-bubble");
+
+  helpBtn.addEventListener("click", () => {
+    helpBubble.classList.toggle("show");
+  });
+
   const countDisplay = document.getElementById("player-count");
   const decreaseBtn = document.querySelector('button[data-action="decrease"]');
   const increaseBtn = document.querySelector('button[data-action="increase"]');
   const playerList = document.querySelector(".play-list");
   const form = document.getElementById("players-form");
   const themeSelect = document.getElementById("theme-select"); // ジャンルセレクト取得
-
 
   let count = 4; // 初期人数
 

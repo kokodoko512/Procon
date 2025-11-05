@@ -6,9 +6,10 @@
     <title>人狼の勝利！</title>
     <style>
       body {
-        background: radial-gradient(circle at center, #1a0000 0%, #000000 100%);
+        /* 🔥 赤黒系の背景 */
+        background: radial-gradient(circle at center, #4d0000 0%, #000000 100%);
         font-family: "Noto Sans JP", sans-serif;
-        color: #fff;
+        color: #111;
         margin: 0;
         padding: 0;
         min-height: 100vh;
@@ -18,12 +19,26 @@
         justify-content: flex-start;
         text-align: center;
         animation: fadeIn 1.2s ease-in-out;
+        position: relative;
+        overflow: hidden;
       }
 
-      .emoji {
-        font-size: 5rem;
-        margin-top: 2rem;
-        animation: pulse 1.8s ease-in-out infinite;
+      /* 🐺 背景に半透明のオオカミ画像を配置 */
+      body::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("img/wolf1.png");
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        background-size: 45%;
+        opacity: 0.25;
+        z-index: 0;
+      }
+
+      h1, p, table, .btn {
+        position: relative;
+        z-index: 1; /* 背景より前に表示 */
       }
 
       @keyframes pulse {
@@ -34,15 +49,17 @@
       h1 {
         font-size: 3rem;
         margin: 1rem 0 0.5rem 0;
-        color: #ff4d4d;
-        text-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+        color: #990000;
+        text-shadow: 0 0 12px rgba(255, 0, 0, 0.4);
       }
 
       p {
-        font-size: 1.3rem;
-        margin-bottom: 2rem;
-        color: #f2f2f2;
+       font-size: 1.3rem;
+       margin-bottom: 2rem;
+       color: #ff9999; /* 少し赤みを帯びた白 */
+       text-shadow: 0 0 10px rgba(255, 50, 50, 0.4); /* 柔らかい赤の発光効果 */
       }
+
 
       table {
         width: 90%;
@@ -50,59 +67,40 @@
         margin: 0 auto 2rem auto;
         border-collapse: collapse;
         text-align: center;
-        background-color: rgba(0,0,0,0.6);
+        background-color: rgba(255,255,255,0.7);
         overflow: hidden;
         box-shadow: 0 0 15px rgba(255,0,0,0.4);
-        table-layout: fixed; /* 列幅を固定して整列 */
+        table-layout: fixed;
       }
 
       th, td {
-        border: 1px solid #ff4d4d;
+        border: 1px solid #b30000;
         padding: 12px;
-        font-size: 1rem;
-        overflow: hidden;
-      }
-
-      /* 折り返しを許可する列（プレイヤー名・曲名・テーマ） */
-      td:nth-child(1),
-      td:nth-child(2),
-      td:nth-child(3) {
-        white-space: normal; /* 折り返し許可 */
-        overflow-wrap: anywhere; /* 長い単語も折り返し */
-        text-overflow: unset; /* 省略無効 */
-      }
-
-      /* 人狼列のみコンパクトで整った表示 */
-      th:nth-child(4),
-      td:nth-child(4) {
-        white-space: nowrap;
-        text-overflow: ellipsis;
+        font-size: 0.7rem;
+        color: #111;
       }
 
       th {
-        background-color: rgba(255, 0, 0, 0.7);
+        background-color: rgba(179, 0, 0, 0.8);
+        color: #fff;
       }
 
-      /* 各列の幅調整 */
-      th:nth-child(1),
-      td:nth-child(1) { width: 13%; }  /* プレイヤー名 */
-      th:nth-child(2),
-      td:nth-child(2) { width: 55%; }  /* 曲名 */
-      th:nth-child(3),
-      td:nth-child(3) { width: 20%; }  /* テーマ */
-      th:nth-child(4),
-      td:nth-child(4) { width: 12%; }  /* 人狼 */
+      /* 列幅調整 */
+      th:nth-child(1), td:nth-child(1) { width: 13%; }
+      th:nth-child(2), td:nth-child(2) { width: 55%; }
+      th:nth-child(3), td:nth-child(3) { width: 20%; }
+      th:nth-child(4), td:nth-child(4) { width: 12%; }
 
       tbody tr:nth-child(even) {
-        background-color: rgba(255, 255, 255, 0.05);
+        background-color: rgba(255, 255, 255, 0.4);
       }
 
       tbody tr:hover {
-        background-color: rgba(255, 255, 255, 0.15);
+        background-color: rgba(255, 255, 255, 0.6);
       }
 
       .btn {
-        background-color: #ff4d4d;
+        background-color: #b30000;
         color: white;
         border: none;
         border-radius: 10px;
@@ -110,23 +108,62 @@
         font-size: 1.1rem;
         cursor: pointer;
         transition: 0.3s;
-        box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
+        box-shadow: 0 4px 10px rgba(255, 0, 0, 0.4);
         margin-bottom: 2rem;
       }
 
       .btn:hover {
-        background-color: #cc0000;
+        background-color: #990000;
         transform: translateY(-2px);
+        box-shadow: 0 0 20px rgba(77, 184, 255, 0.8);
       }
 
       @keyframes fadeIn {
         from { opacity: 0; transform: scale(0.9); }
         to { opacity: 1; transform: scale(1); }
       }
+      /* 📱 スマホ向け調整 */
+@media screen and (max-width: 600px) {
+  table {
+    width: 95%;
+    font-size: 0.85rem; /* 全体を少し小さく */
+    margin: 1rem auto;  
+  }
+
+  th, td {
+    padding: 0.5px; /* 余白を小さくしてコンパクトに */
+    white-space: normal; /* 改行を許可 */
+    overflow-wrap: anywhere; /* 長い単語も自然に折り返し */
+  }
+
+  th:nth-child(1),
+  td:nth-child(1) { width: 18%; }  /* プレイヤー名 少し広く */
+  th:nth-child(2),
+  td:nth-child(2) { width: 47%; }  /* 曲名 少し短め */
+  th:nth-child(3),
+  td:nth-child(3) { width: 23%; }  /* テーマ */
+  th:nth-child(4),
+  td:nth-child(4) { width: 12%; }  /* 人狼 */
+
+
+  h1{
+    font-size: 3rem;
+  }
+  
+
+  p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+
+  .btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+  }
+}
     </style>
   </head>
   <body>
-    <div class="emoji">🐺</div>
     <h1>人狼の勝利！</h1>
     <p>人狼が最後まで正体を隠し通しました…</p>
 
