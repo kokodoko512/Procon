@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const resultTbody = document.getElementById("players-result");
 
   try {
-    const res = await fetch("http://localhost:3000/api/result");
+    const res = await fetch("http://10.75.63.165:3000/api/result");
     const players = await res.json();
 
     console.log("取得データ:", players); // 確認用
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       tdTheme.textContent = player.theme_name || "—";
 
       const wolfTd = document.createElement("td");
-      wolfTd.textContent = player.wolf ? "🐺 人狼" : "🐏 市民";
+      wolfTd.textContent = player.wolf ? "人狼" : "市民";
 
       tr.appendChild(tdName);
       tr.appendChild(tdSongName);
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function restartGame() {
   try {
-    const res = await fetch("http://localhost:3000/api/reset-game", {
+    const res = await fetch("http://10.75.63.165:3000/api/reset-game", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
     });

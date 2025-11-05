@@ -11,7 +11,7 @@ async function loadPlayer() {
     const currentIndex = parseInt(urlParams.get("player")) || 0;
 
     try {
-        const res = await fetch("http://localhost:3000/api/players");
+        const res = await fetch("http://10.75.63.165:3000/api/players");
         const players = await res.json();
         currentPlayer = players[currentIndex];
 
@@ -23,8 +23,12 @@ async function loadPlayer() {
         const playerName = currentPlayer.name;
         const playerTheme = currentPlayer.theme_name || "テーマ未設定";
 
-        document.getElementById("theme").textContent =
-        `${playerName}さんのテーマは「${playerTheme}」です`;
+        document.getElementById("theme").innerHTML =
+        `${playerName}さんのテーマは<br><span style="
+    font-size:1.5rem;
+    font-weight:bold;
+    color:#4db8ff;
+    text-shadow:0 0 10px rgba(77, 184, 255, 0.6);">「${playerTheme}」</span>`;
 
         return currentPlayer;
     } catch (err) {
@@ -87,7 +91,7 @@ async function fetchVideos(isLoadMore = false) {
                 if (!confirm(`この曲を選択しますか？\n\n${title}`)) return;
 
                 try {
-                    const res = await fetch("http://localhost:3000/api/youtube/register-song", {
+                    const res = await fetch("http://10.75.63.165:3000/api/youtube/register-song", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
@@ -107,7 +111,7 @@ async function fetchVideos(isLoadMore = false) {
                         const urlParams = new URLSearchParams(window.location.search);
                         const nextIndex = parseInt(urlParams.get("player")) + 1;
 
-                        const playersRes = await fetch("http://localhost:3000/api/players");
+                        const playersRes = await fetch("http://10.75.63.165:3000/api/players");
                         const players = await playersRes.json();
 
                         if (nextIndex < players.length) {

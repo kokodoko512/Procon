@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  const helpBtn = document.getElementById("help-btn");
+  const helpBubble = document.getElementById("help-bubble");
+
+  helpBtn.addEventListener("click", () => {
+    helpBubble.classList.toggle("show");
+  });
+
   const countDisplay = document.getElementById("player-count");
   const decreaseBtn = document.querySelector('button[data-action="decrease"]');
   const increaseBtn = document.querySelector('button[data-action="increase"]');
@@ -6,12 +13,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   const form = document.getElementById("players-form");
   const themeSelect = document.getElementById("theme-select"); // ジャンルセレクト取得
 
-
   let count = 4; // 初期人数
 
   // ジャンル一覧をDBから取得して反映
   try {
-    const response = await fetch("http://localhost:3000/api/genres");
+    const response = await fetch("http://10.75.63.165:3000/api/genres");
     if (!response.ok) throw new Error("ジャンル取得に失敗しました");
     const genres = await response.json();
 
@@ -105,7 +111,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.log("テーマ取得開始");
 
       // テーマランダム取得
-      const themeRes = await fetch(`http://localhost:3000/api/theme?genre_id=${genre_id}`);
+      const themeRes = await fetch(`http://10.75.63.165:3000/api/theme?genre_id=${genre_id}`);
       if (!themeRes.ok) throw new Error("テーマ取得失敗");
       const themeData = await themeRes.json();
       console.log("テーマ取得完了:", themeData);
@@ -113,7 +119,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       // プレイヤー登録
       console.log("プレイヤー登録");
       for (const name of playerNames) {
-        const playerRes = await fetch("http://localhost:3000/api/players", {
+        const playerRes = await fetch("http://10.75.63.165:3000/api/players", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ name })
@@ -125,14 +131,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       // 人狼決定
       console.log("人狼決定");
-      const wolfRes = await fetch("http://localhost:3000/api/wolf", { method: "POST" });
+      const wolfRes = await fetch("http://10.75.63.165:3000/api/wolf", { method: "POST" });
       if (!wolfRes.ok) throw new Error("人狼決定失敗");
       const wolfData = await wolfRes.json();
       console.log("人狼決定:", wolfData);
 
       // テーマ割り当て
       console.log("テーマ割り当て");
-      const postThemeRes = await fetch("http://localhost:3000/api/post-theme", { method: "POST" });
+      const postThemeRes = await fetch("http://10.75.63.165:3000/api/post-theme", { method: "POST" });
       if (!postThemeRes.ok) throw new Error("テーマ割り当て失敗");
       const assignedData = await postThemeRes.json();
       console.log("テーマ割り当て完了:", assignedData);

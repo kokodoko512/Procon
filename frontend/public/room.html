@@ -14,7 +14,13 @@
     </header> 
     <main id="player-setting" role="main" aria-labelledby="page-title">
       <h1 id="page-title">プレイヤー設定</h1>
-      <h3 id="players-count-heading">～ジャンル選択～</h3>
+      <h3 id="players-count-heading">～ジャンル～
+      <button id="help-btn" class="help-button" aria-label="ジャンルとは？">？</button>
+      </h3>
+      <div id="help-bubble" class="help-bubble">
+        「ジャンル」はこのゲームで扱うテーマを選ぶ項目です。
+      </div>
+
       <p id="players-genre" class="sr-only">ジャンルを選択してください。</p>
       <select id="theme-select">
         <option value="">ジャンル選択</option>
