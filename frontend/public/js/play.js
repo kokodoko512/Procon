@@ -20,7 +20,7 @@ function onYouTubeIframeAPIReady() {
 // 曲リスト取得
 async function loadSongs() {
   try {
-    const res = await fetch("http://10.75.63.165:3000/api/youtube/songs");
+    const res = await fetch("https://procon-e8vw.onrender.com/api/youtube/songs");
     songs = await res.json();
     playlist = songs.map(s => s.youtube_id);
 

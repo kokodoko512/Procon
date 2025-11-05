@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let players = [];
   try {
     // プレイヤー一覧取得
-    const res = await fetch("http://10.75.63.165:3000/api/players");
+    const res = await fetch("https://procon-e8vw.onrender.com/api/players");
     players = await res.json();
 
     if (!players || players.length === 0) {

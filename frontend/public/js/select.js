@@ -11,7 +11,7 @@ async function loadPlayer() {
     const currentIndex = parseInt(urlParams.get("player")) || 0;
 
     try {
-        const res = await fetch("http://10.75.63.165:3000/api/players");
+        const res = await fetch("https://procon-e8vw.onrender.com/api/players");
         const players = await res.json();
         currentPlayer = players[currentIndex];
 
@@ -91,7 +91,7 @@ async function fetchVideos(isLoadMore = false) {
                 if (!confirm(`この曲を選択しますか？\n\n${title}`)) return;
 
                 try {
-                    const res = await fetch("http://10.75.63.165:3000/api/youtube/register-song", {
+                    const res = await fetch("https://procon-e8vw.onrender.com/api/youtube/register-song", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
@@ -111,7 +111,7 @@ async function fetchVideos(isLoadMore = false) {
                         const urlParams = new URLSearchParams(window.location.search);
                         const nextIndex = parseInt(urlParams.get("player")) + 1;
 
-                        const playersRes = await fetch("http://10.75.63.165:3000/api/players");
+                        const playersRes = await fetch("https://procon-e8vw.onrender.com/api/players");
                         const players = await playersRes.json();
 
                         if (nextIndex < players.length) {
