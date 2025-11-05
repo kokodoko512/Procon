@@ -10,7 +10,7 @@ const pool = mysql.createPool({
     database: process.env.DB_DATABASE,
     port: process.env.DB_PORT || 3306,
     ssl: {
-        rejectUnauthorized: true, // SSL証明書を検証
+        rejectUnauthorized: false, // SSL証明書を検証
     },
 });
 
