@@ -10,7 +10,13 @@ dotenv.config();
 // Express設定
 // =========================
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: [
+        "https://frontend-2x0t.onrender.com", // フロントのURL
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type"],
+}));
 app.use(express.json());
 
 // 動作確認
