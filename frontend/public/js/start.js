@@ -1,7 +1,7 @@
 document.querySelector(".create-btn").addEventListener("click", async() => {
   try {
     // APIにPOSTリクエスト送信
-    const response = await fetch("http://10.75.63.165:3000/api/reset-game", {
+    const response = await fetch("http://192.168.10.12:3000/api/reset-game", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

@@ -1,22 +1,10 @@
 import express from "express";
 import cors from "cors";
-import mysql from "mysql2/promise";
 import dotenv from "dotenv";
 import fetch from "node-fetch";
+import db from "./db.js"; // ← db.jsを読み込む
 
 dotenv.config();
-
-
-// =========================
-// DB接続設定
-// =========================
-const db = await mysql.createConnection({
-    host: "10.75.69.141",
-    user: "user556",
-    password: "0922",
-    database: "mw",
-});
-
 
 // =========================
 // Express設定
@@ -25,13 +13,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
-// =========================
 // 動作確認
-// =========================
 app.get("/", (req, res) => {
     res.send("Music Werewolf API is running!");
 });
+
 
 
 // =========================
