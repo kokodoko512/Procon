@@ -185,8 +185,8 @@ app.get("/api/result", async (req, res) => {
 // 8.ゲーム初期化
 app.post("/api/reset-game", async (req, res) => {
     try {
-        await db.execute("DELETE FROM SONG");
         await db.execute("DELETE FROM PLAYER");
+        await db.execute("DELETE FROM SONG");
         await db.execute("ALTER TABLE SONG AUTO_INCREMENT = 1");
         await db.execute("ALTER TABLE PLAYER AUTO_INCREMENT = 1");
 
