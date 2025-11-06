@@ -170,6 +170,9 @@ button[data-action="decrease"] {
   cursor: pointer;
   filter: drop-shadow(0 0 12px rgba(67, 151, 236, 0.607));
   transition: all 0.3s ease;
+  text-align: center;
+  line-height: 28px;
+  padding: 0;
 }
 
 /* 決定ボタン */
@@ -236,6 +239,7 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):hover  
   display: inline-block;
 }
 
+/* ヘルプボタン */
 .help-button {
   background-color: #00aaff;
   color: white;
