@@ -161,7 +161,7 @@ button[data-action="decrease"] {
 .decrease {
   width: 30px;
   height: 30px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   border: none;
   border-radius: 6px;
@@ -170,9 +170,9 @@ button[data-action="decrease"] {
   cursor: pointer;
   filter: drop-shadow(0 0 12px rgba(67, 151, 236, 0.607));
   transition: all 0.3s ease;
-  text-align: center;
-  line-height: 28px;
-  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* 決定ボタン */
