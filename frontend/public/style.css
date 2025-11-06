@@ -156,6 +156,22 @@ button[data-action="decrease"] {
   font-size: 1.1rem;
 }
 
+/* 投票+-ボタン */
+.increase,
+.decrease {
+  width: 30px;
+  height: 30px;
+  font-size: 10px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  background: hsl(198, 78%, 65%);
+  color: white;
+  cursor: pointer;
+  filter: drop-shadow(0 0 12px rgba(67, 151, 236, 0.607));
+  transition: all 0.3s ease;
+}
+
 /* 決定ボタン */
 #finish-vote {
   width: 154px;
