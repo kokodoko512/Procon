@@ -29,9 +29,9 @@
         <h3 id="players-count-heading">～人数～</h3>
 
         <div class="count-control" role="group" aria-label="プレイヤー人数の操作">
-          <button type="button" data-action="decrease" class="button" aria-label="人数を減らす">◀</button>
+          <button type="button" data-action="decrease" class="count-btn" aria-label="人数を減らす">◀</button>
           <span class="count" id="player-count" role="status" aria-live="polite" data-count="4">4</span>
-          <button type="button" data-action="increase" class="button" aria-label="人数を増やす">▶</button>
+          <button type="button" data-action="increase" class="count-btn" aria-label="人数を増やす">▶</button>
         </div>
       </section>
 
@@ -78,8 +78,11 @@
 
           </div> 
         </fieldset>
+
+        <br>
         <div class="actions">
-          <center><button type="submit" aria-label="ゲームへ進む">ゲーム開始</button></center>
+          <center><button class="action-btn" type="submit" aria-label="ゲームへ進む"></button></center>
+        </div>
       </form>
     </main>
     <script src=js/room.js></script>
