@@ -129,9 +129,7 @@ input[type="text"]:focus {
 
 /* ＋−ボタン */
 button[data-action="increase"],
-button[data-action="decrease"],
-.increase,
-.dexrease {
+button[data-action="decrease"] {
   font-size: 10px;
   background: hsl(198, 78%, 65%);
   color: white;
@@ -202,7 +200,7 @@ button[data-action="decrease"],
 }
 
 .help-button {
-  background-color: #3abdfe;
+  background-color: #00aaff;
   color: white;
   border: none;
   border-radius: 50%;
