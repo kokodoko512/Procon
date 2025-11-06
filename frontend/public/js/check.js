@@ -33,6 +33,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     if(!currentPlayer) return;
 });
 
-document.getElementById("yes-button").addEventListener("click", () => {
+document.getElementById("yes-btn").addEventListener("click", () => {
     window.location.href = `select.html?player=${currentIndex}`;
 });
