@@ -70,13 +70,6 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):hover  {
   filter: drop-shadow(0 0 18px rgba(117, 216, 255, 0.8));
 }
 
-/* ヘルプボタン */
-.help-button {
-  text-align: center;
-  line-height: 28px;
-  padding: 0;
-}
-
 /* 入力欄 */
 input[type="text"]{
   width: 90%;
@@ -136,7 +129,9 @@ input[type="text"]:focus {
 
 /* ＋−ボタン */
 button[data-action="increase"],
-button[data-action="decrease"] {
+button[data-action="decrease"],
+.increase,
+.dexrease {
   font-size: 10px;
   background: hsl(198, 78%, 65%);
   color: white;
@@ -207,7 +202,7 @@ button[data-action="decrease"] {
 }
 
 .help-button {
-  background-color: #00aaff;
+  background-color: #3abdfe;
   color: white;
   border: none;
   border-radius: 50%;
@@ -217,6 +212,9 @@ button[data-action="decrease"] {
   margin-left: 8px;
   cursor: pointer;
   transition: 0.2s;
+  text-align: center;
+  line-height: 28px;
+  padding: 0;
 }
 
 .help-button:hover {
