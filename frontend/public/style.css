@@ -188,14 +188,14 @@ input[type="text"]:focus {
 
 /* 決定ボタン */
 #finish-vote {
-  width: 154px;
-  height: 66px;
+  width: 140px;
+  height: 60px;
   background-image: url("img/finish.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-color: transparent;
   background-position: center;
-  margin-top: 10px;
+  margin-top: 15px;
   border: none;
   cursor: pointer;
   filter: drop-shadow(0 0 12px rgba(67, 151, 236, 0.607));
