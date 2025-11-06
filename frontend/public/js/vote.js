@@ -27,9 +27,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     row.classList.add("vote-row");
     row.innerHTML = `
       <span class="player-name">${player.name}</span>
-      <button class="decrease" data-index="${index}">−</button>
+      <button class="decrease" data-index="${index}">-</button>
       <span class="vote-count" id="vote-${index}">0</span>
-      <button class="increase" data-index="${index}">＋</button>
+      <button class="increase" data-index="${index}">+</button>
     `;
     voteList.appendChild(row);
   });
