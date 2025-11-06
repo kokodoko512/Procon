@@ -161,7 +161,7 @@ button[data-action="decrease"] {
 .decrease {
   width: 30px;
   height: 30px;
-  font-size: 10px;
+  font-size: 20px;
   font-weight: bold;
   border: none;
   border-radius: 6px;
@@ -190,7 +190,7 @@ button[data-action="decrease"] {
 
 #finish-vote:hover {
   transform: translateY(-2px);
-  filter: drop-shadow(0 0 16px rgba(117, 216, 255, 0.8));
+  filter: drop-shadow(0 0 14px rgba(117, 216, 255, 0.75));
 }
 
 /* ボタン共通 */
