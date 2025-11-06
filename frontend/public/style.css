@@ -158,8 +158,8 @@ button[data-action="decrease"] {
 
 /* 決定ボタン */
 #finish-vote {
-  width: 168px;
-  height: 72px;
+  width: 154px;
+  height: 66px;
   background-image: url("img/finish.png");
   background-size: contain;
   background-repeat: no-repeat;
