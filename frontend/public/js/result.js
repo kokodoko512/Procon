@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const tr = document.createElement("tr");
 
       if (player.wolf) {
-        tr.style.backgroundColor = "#f9b2b2";
+        tr.style.backgroundColor = "rgb(138, 44, 44)";
         tr.style.fontWeight = "bold";
       }
 

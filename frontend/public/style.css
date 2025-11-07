@@ -13,7 +13,7 @@ body {
 
 /* タイトル */
 h1 {
-  margin: 50px 0 20px; /* 上40px→60px、下20px→40pxに調整して距離確保 */
+  margin: 50px 0 20px;
   font-size: 2rem;
   color: rgb(186, 240, 255);
   text-shadow: 0 0 12px rgba(50, 161, 202, 0.947);
