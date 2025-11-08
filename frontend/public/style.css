@@ -147,50 +147,30 @@ input[type="text"]:focus {
   filter: drop-shadow(0 0 16px rgba(117, 216, 255, 0.8));
 }
 
-/* 投票画面 */
+/* 投票行 */
 .vote-row {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.08);
-  padding: 12px;
-  border-radius: 10px;
-  margin: 10px auto;
-  width: 90%;
-  max-width: 600px;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
-}
-
-.player-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.player-info img {
-  width: 90px;
-  height: auto;
-  border-radius: 6px;
+  gap: 12px;
+  margin: 8px 0;
 }
 
 .player-name {
+  width: 130px;
   font-weight: bold;
-  color: #e5f6ff;
-  font-size: 1rem;
+  text-align: left;
 }
 
-.song-title {
-  font-size: 0.9rem;
-  color: #aee2ff;
+.vote-count {
+  width: 28px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1rem;
 }
 
-.vote-controls {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.vote-controls button {
+/* 投票+-ボタン */
+.increase,
+.decrease {
   width: 30px;
   height: 30px;
   font-size: 18px;
@@ -200,43 +180,33 @@ input[type="text"]:focus {
   background: hsl(198, 78%, 65%);
   color: white;
   cursor: pointer;
-  transition: 0.2s;
+  filter: drop-shadow(0 0 12px rgba(67, 151, 236, 0.607));
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.vote-controls button:hover {
-  background: #21a5f1;
+/* 決定ボタン */
+#finish-vote {
+  width: 140px;
+  height: 60px;
+  background-image: url("img/finish.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center;
+  margin-top: 15px;
+  border: none;
+  cursor: pointer;
+  filter: drop-shadow(0 0 12px rgba(67, 151, 236, 0.607));
+  transition: all 0.3s ease;
 }
 
-.vote-count {
-  width: 30px;
-  text-align: center;
-  color: #fff;
-  font-size: 1rem;
+#finish-vote:hover {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 14px rgba(117, 216, 255, 0.75));
 }
-
-/* スマホ対応 */
-@media screen and (max-width: 600px) {
-  .vote-row {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px;
-  }
-
-  .player-info {
-    width: 100%;
-  }
-
-  .vote-controls {
-    width: 100%;
-    justify-content: space-between;
-    margin-top: 8px;
-  }
-
-  .player-info img {
-    width: 70px;
-  }
-}
-
 
 /* ボタン共通 */
 button:not(.create-btn):not(.action-btn):not(.count-btn):not(.help-button):not(#yes-btn):not(#finish-vote) { 
