@@ -418,3 +418,147 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):hover  
     font-size: 0.8rem;
   }
 }
+
+/* タイトル */
+h1 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-top: 1.5rem;
+  color: rgb(186, 240, 255);
+  text-shadow: 0 0 12px rgba(67, 151, 236, 0.8);
+}
+
+/* 現在再生中タイトル */
+#now-playing {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #e5f6ff;
+}
+
+/* 曲一覧コンテナ */
+#song-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 700px;
+}
+
+/* 各曲アイテム */
+.song-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 10px 14px;
+  transition: background 0.2s ease;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+.song-item:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* サムネイル画像 */
+.song-item img {
+  width: 140px;        /* 自然な大きさ */
+  height: auto;        /* 縦横比を保持 */
+  border-radius: 6px;
+  margin-right: 14px;
+  object-fit: cover;
+}
+
+/* 曲タイトルと投稿者名 */
+.song-item strong {
+  color: #e5f6ff;
+  font-size: 1rem;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
+}
+
+.song-item span {
+  color: #aee2ff;
+  font-size: 0.9rem;
+}
+
+/* 再生ボタン */
+.song-item button {
+  background-color: hsl(198, 78%, 65%);
+  border: none;
+  color: white;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.song-item button:hover {
+  background-color: #21a5f1;
+  box-shadow: 0 0 8px rgba(42, 175, 228, 0.6);
+}
+
+/* 全曲再生・人狼当てボタン */
+#play-all-btn,
+#next-btn {
+  display: block;
+  margin: 20px auto;
+  background-color: hsl(198, 78%, 65%);
+  border: none;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#play-all-btn:hover,
+#next-btn:hover {
+  background-color: #21a5f1;
+  box-shadow: 0 0 10px rgba(42, 175, 228, 0.6);
+}
+
+/* YouTubeプレイヤー */
+#player {
+  width: 90%;
+  max-width: 640px;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: 0 0 12px rgba(67, 151, 236, 0.4);
+}
+
+/* スマホ対応 */
+@media screen and (max-width: 600px) {
+  .song-item {
+    flex-direction: row;
+    align-items: center;
+    padding: 8px;
+  }
+
+  .song-item img {
+    width: 90px;
+    height: auto;
+    margin-right: 10px;
+  }
+
+  .song-item strong {
+    max-width: 120px;
+    font-size: 0.85rem;
+  }
+
+  .song-item button {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+}
