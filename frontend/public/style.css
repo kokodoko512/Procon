@@ -369,6 +369,7 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):hover  
 .track-title {
   color: #e5f6ff;
   font-size: 0.95rem;
+  font-family: sans-serif;
   text-align: left;
   white-space: normal;
   word-break: break-word;
