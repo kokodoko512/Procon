@@ -328,69 +328,76 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):hover  
   margin: 1rem auto 2rem auto;
 }
 
-/* 各動画アイテム */
+/* 各曲の行レイアウト */
 .track-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 10px;
-  box-shadow: 0 0 10px rgba(77, 184, 255, 0.3);
-  gap: 10px;
+  justify-content: space-between; /* 横並びで等間隔 */
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 8px auto;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+  transition: background 0.2s ease;
 }
 
+.track-item:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* サムネイル画像 */
 .track-item img {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 6px;
   flex-shrink: 0;
 }
 
-.track-item div {
-  flex: 1;
-  word-break: break-word;
-  font-size: 0.95rem;
+/* タイトル（省略されないよう調整） */
+.track-title {
+  flex-grow: 1;
+  margin-left: 12px;
+  margin-right: 12px;
   text-align: left;
+  font-size: 0.95rem;
+  color: #e5f6ff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.track-item button {
-  padding: 8px 14px;
+/* 選択ボタン */
+.select-btn {
+  background-color: hsl(198, 78%, 65%);
   border: none;
-  border-radius: 6px;
-  background-color: #007acc;
   color: white;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: 0.2s;
 }
 
-.track-item button:hover {
-  background-color: #005fa3;
+.select-btn:hover {
+  background-color: #21a5f1;
+  box-shadow: 0 0 8px rgba(42, 175, 228, 0.6);
 }
 
-/* スマホ対応 */
+/* スマホ時（600px以下）は縦並びに */
 @media screen and (max-width: 600px) {
   .track-item {
-    flex-direction: column;       /* 縦並びに変更 */
+    flex-direction: column;
     align-items: flex-start;
   }
 
-  .track-item img {
-    width: 60px;      /* ← 以前の80pxから小さく */
-    height: 60px;
-    border-radius: 6px;
-    flex-shrink: 0;
+  .track-title {
+    margin: 8px 0;
+    white-space: normal;
   }
 
-  .track-item div {
-    width: 100%;
-    text-align: left;
-  }
-
-  .track-item button {
-    width: 100%;
-    text-align: center;
-    margin-top: 6px;
+  .select-btn {
+    align-self: flex-end;
   }
 }
