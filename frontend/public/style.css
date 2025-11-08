@@ -196,7 +196,7 @@ input[type="text"]:focus {
   background-repeat: no-repeat;
   background-color: transparent;
   background-position: center;
-  margin-top: 15px;
+  margin-top: 20px;
   border: none;
   cursor: pointer;
   filter: drop-shadow(0 0 12px rgba(67, 151, 236, 0.607));
