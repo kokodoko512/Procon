@@ -373,6 +373,7 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):hover  
   white-space: normal;
   word-break: break-word;
   overflow: visible;
+  font-style: bold;
 }
 
 /* 選択ボタン */
