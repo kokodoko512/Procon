@@ -253,7 +253,7 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):hover  
 
 /* ヘルプボタン */
 .help-button {
-  background-color: #31cfff;
+  background-color: hsl(198, 78%, 65%);
   color: white;
   border: none;
   border-radius: 50%;
@@ -320,4 +320,76 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):hover  
 
 #search-btn{
   margin-top: 2rem;
+}
+
+#search-results {
+  width: 90%;
+  max-width: 700px;
+  margin: 1rem auto 2rem auto;
+}
+
+/* 各動画アイテム */
+.track-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 10px rgba(77, 184, 255, 0.3);
+  gap: 10px;
+}
+
+.track-item img {
+  width: 80px;
+  height: 80px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.track-item div {
+  flex: 1;
+  word-break: break-word;
+  font-size: 0.95rem;
+  text-align: left;
+}
+
+.track-item button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #007acc;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.track-item button:hover {
+  background-color: #005fa3;
+}
+
+/* スマホ対応 */
+@media screen and (max-width: 600px) {
+  .track-item {
+    flex-direction: column;       /* 縦並びに変更 */
+    align-items: flex-start;
+  }
+
+  .track-item img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 8px;
+  }
+
+  .track-item div {
+    width: 100%;
+    text-align: left;
+  }
+
+  .track-item button {
+    width: 100%;
+    text-align: center;
+    margin-top: 6px;
+  }
 }
