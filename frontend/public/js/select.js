@@ -76,62 +76,78 @@ async function fetchVideos(isLoadMore = false) {
                 video.snippet.thumbnails.medium?.url ||
                 video.snippet.thumbnails.default.url;
 
+            // コンテナ要素
             const div = document.createElement("div");
             div.className = "track-item";
-            div.innerHTML = `
-                <img src="${thumbnail}" alt="Thumbnail">
-                <div><strong>${title}</strong></div>
-            `;
 
+            // サムネイル
+            const img = document.createElement("img");
+            img.src = thumbnail;
+            img.alt = "Thumbnail";
+
+            // タイトル
+            const titleDiv = document.createElement("div");
+            titleDiv.className = "track-title";
+            titleDiv.textContent = title;
+
+            // 選択ボタン
             const button = document.createElement("button");
+            button.className = "select-btn";
             button.textContent = "選択";
+
+            // ボタン動作
             button.addEventListener("click", async () => {
                 if (!confirm(`この曲を選択しますか？\n\n${title}`)) return;
 
                 try {
-                const res = await fetch(
-                    "https://procon-e8vw.onrender.com/api/youtube/register-song",
-                    {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        player_id: currentPlayer.player_id,
-                        youtube_id: videoId,
-                        title: title,
-                        album_image: thumbnail, // ←登録も高画質URLで
-                    }),
-                    }
-                );
-
-                const result = await res.json();
-
-                if (res.ok) {
-                    alert("曲を登録しました！");
-                    const urlParams = new URLSearchParams(window.location.search);
-                    const nextIndex = parseInt(urlParams.get("player")) + 1;
-
-                    const playersRes = await fetch(
-                    "https://procon-e8vw.onrender.com/api/players"
+                    const res = await fetch(
+                        "https://procon-e8vw.onrender.com/api/youtube/register-song",
+                        {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                player_id: currentPlayer.player_id,
+                                youtube_id: videoId,
+                                title: title,
+                                album_image: thumbnail,
+                            }),
+                        }
                     );
-                    const players = await playersRes.json();
 
-                    if (nextIndex < players.length) {
-                    window.location.href = `check.html?player=${nextIndex}`;
+                    const result = await res.json();
+
+                    if (res.ok) {
+                        alert("曲を登録しました！");
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const nextIndex = parseInt(urlParams.get("player")) + 1;
+
+                        const playersRes = await fetch(
+                            "https://procon-e8vw.onrender.com/api/players"
+                        );
+                        const players = await playersRes.json();
+
+                        if (nextIndex < players.length) {
+                            window.location.href = `check.html?player=${nextIndex}`;
+                        } else {
+                            window.location.href = "play.html";
+                        }
                     } else {
-                    window.location.href = "play.html";
+                        alert(result.error || "登録に失敗しました。");
                     }
-                } else {
-                    alert(result.error || "登録に失敗しました。");
-                }
                 } catch (err) {
-                console.error(err);
-                alert("曲登録中にエラーが発生しました");
+                    console.error(err);
+                    alert("曲登録中にエラーが発生しました");
                 }
             });
 
+            // 要素を組み立て
+            div.appendChild(img);
+            div.appendChild(titleDiv);
             div.appendChild(button);
+
+            // 表示領域に追加
             list.appendChild(div);
-            });
+        });
 
         nextPageToken = data.nextPageToken || "";
         document.getElementById("load-more").style.display = nextPageToken

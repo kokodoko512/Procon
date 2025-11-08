@@ -377,9 +377,10 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):hover  
   }
 
   .track-item img {
-    width: 100%;
-    height: auto;
-    margin-bottom: 8px;
+    width: 60px;      /* ← 以前の80pxから小さく */
+    height: 60px;
+    border-radius: 6px;
+    flex-shrink: 0;
   }
 
   .track-item div {
