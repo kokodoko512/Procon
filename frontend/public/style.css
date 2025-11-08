@@ -35,6 +35,7 @@ h1 {
 .create-btn {
   width: 240px;
   height: 92px;
+  margin-top: 20px;
   background-image: url("img/create-btn.png");
   background-size: cover;
   background-repeat: no-repeat;
@@ -358,8 +359,8 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):hover  
 
 /* サムネイル画像 */
 .track-item img {
-  width: 60px;
-  height: 60px;
+  width: 100px;
+  height: 100px;
   border-radius: 6px;
   flex-shrink: 0;
 }
@@ -400,8 +401,8 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):hover  
   }
 
   .track-info img {
-    width: 48px;
-    height: 48px;
+    width: 65px;
+    height: 65px;
   }
 
   .track-title {
