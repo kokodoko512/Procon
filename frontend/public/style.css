@@ -385,6 +385,7 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):hover  
   font-size: 0.9rem;
   cursor: pointer;
   transition: 0.2s;
+  margin-left: 3px;
 }
 
 .select-btn:hover {
@@ -408,8 +409,6 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):hover  
   .track-title {
     font-size: 0.85rem;
     line-height: 1.3;
-    margin-left: 3px;
-    margin-right: 3px;
   }
 
   .select-btn {
