@@ -22,7 +22,9 @@ document.querySelector(".create-btn").addEventListener("click", async() => {
     console.log(data.message);
 
     // room.htmlに遷移
-    window.location.href = "room.html";
+    setTimeout(() => {
+      window.location.href = "room.html";
+    }, 350);
 
   } catch (error) {
     console.error("初期化失敗:", error);
