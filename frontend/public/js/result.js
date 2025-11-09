@@ -1,6 +1,12 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const resultTbody = document.getElementById("players-result");
 
+  const resultSound = new Audio("sound/result.mp3");
+  resultSound.volume = 0.7;
+  resultSound.play().catch((e) => {
+    console.warn("サウンドの再生ブロック", e);
+  });
+
   try {
     const res = await fetch("https://procon-e8vw.onrender.com/api/result");
     const players = await res.json();
