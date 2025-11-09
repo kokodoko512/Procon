@@ -111,6 +111,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       } else {
         window.location.href = "wolf_win.html";
       }
-    }, 1000);
+    }, 2000);
   });
 });
