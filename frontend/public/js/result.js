@@ -21,12 +21,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     players.forEach((player, index) => {
       const tr = document.createElement("tr");
 
-      if (player.wolf) {
-        tr.style.backgroundColor = "rgb(138, 44, 44)";
-        tr.style.color = "rgba(255, 255, 255, 1)";
-        tr.style.fontWeight = "bold";
-      }
-
       const tdName = document.createElement("td");
       tdName.textContent = player.name || `プレイヤー${index + 1}`;
 
@@ -38,6 +32,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const wolfTd = document.createElement("td");
       wolfTd.textContent = player.wolf ? "人狼" : "市民";
+
+      // 行を追加する前に色を設定
+      if (player.wolf) {
+        tr.style.backgroundColor = "rgb(138, 44, 44)";
+        tr.style.fontWeight = "bold";
+
+        // 各セルの文字色も白に設定
+        [tdName, tdSongName, tdTheme, wolfTd].forEach(td => {
+          td.style.color = "#ffffff";
+        });
+      }
 
       tr.appendChild(tdName);
       tr.appendChild(tdSongName);
