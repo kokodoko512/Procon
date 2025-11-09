@@ -103,12 +103,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     clickSound.play().catch((e) => {
       console.warn("サウンドの再生ブロック", e);
     });
-    
+
     // 勝敗判定・遷移
-    if (wolfId === realWolfId) {
-      window.location.href = "citizen_win.html";
-    } else {
-      window.location.href = "wolf_win.html";
-    }
+    setTimeout(() => {
+      if (wolfId === realWolfId) {
+        window.location.href = "citizen_win.html";
+      } else {
+        window.location.href = "wolf_win.html";
+      }
+    }, 350);
   });
 });

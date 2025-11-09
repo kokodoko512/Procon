@@ -40,5 +40,7 @@ document.getElementById("yes-btn").addEventListener("click", () => {
         console.warn("サウンドの再生ブロック", e);
     });
     
-    window.location.href = `select.html?player=${currentIndex}`;
+    setTimeout(() => {
+        window.location.href = `select.html?player=${currentIndex}`;
+    }, 350);
 });
