@@ -84,23 +84,22 @@
       }
 
       .btn {
-        background-color: #007acc;
-        color: white;
+        width: 144px;
+        height: 36px;
+        margin-top: 20px;
+        background-image: url("img/restart.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: transparent;
         border: none;
-        border-radius: 10px;
-        padding: 0.8rem 2rem;
-        font-size: 1.1rem;
         cursor: pointer;
-        transition: 0.3s;
-        box-shadow: 0 0 15px rgba(77, 184, 255, 0.5);
-        margin-bottom: 2rem;
-        margin-top: 10px;
+        filter: drop-shadow(0 0 12px rgba(67, 151, 236, 0.607));
+        transition: all 0.3s ease;
       }
 
       .btn:hover {
-        background-color: #0066b2;
-        transform: translateY(-2px);
-        box-shadow: 0 0 20px rgba(77, 184, 255, 0.8);
+        transform: translateY(-3px);
+        filter: drop-shadow(0 0 18px rgba(117, 216, 255, 0.8));
       }
 
       @keyframes fadeIn {
@@ -145,11 +144,6 @@
         p {
           font-size: 1.2rem;
           line-height: 1.6;
-        }
-
-        .btn {
-          padding: 0.6rem 1.5rem;
-          font-size: 1rem;
         }
       }
     </style>
