@@ -74,7 +74,6 @@
       }
 
       th, td {
-        border: 1px solid #b30000;
         padding: 12px;
         font-size: 0.7rem;
         color: #111;
@@ -115,14 +114,14 @@
       .btn:hover {
         background-color: #990000;
         transform: translateY(-2px);
-        box-shadow: 0 0 20px rgba(77, 184, 255, 0.8);
+        box-shadow: 0 0 20px rgba(72, 27, 27, 0.8);
       }
 
       @keyframes fadeIn {
         from { opacity: 0; transform: scale(0.9); }
         to { opacity: 1; transform: scale(1); }
       }
-      /* 📱 スマホ向け調整 */
+      /* スマホ向け調整 */
 @media screen and (max-width: 600px) {
   table {
     width: 95%;
@@ -131,7 +130,7 @@
   }
 
   th, td {
-    padding: 0.5px; /* 余白を小さくしてコンパクトに */
+    padding: 2px; /* 余白を小さくしてコンパクトに */
     white-space: normal; /* 改行を許可 */
     overflow-wrap: anywhere; /* 長い単語も自然に折り返し */
   }
