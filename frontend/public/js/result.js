@@ -53,6 +53,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 async function restartGame() {
+  const clickSound = new Audio("sound/btn.mp3");
+  clickSound.volume = 0.8;
+  clickSound.play().catch((e) => {
+    console.warn("サウンドの再生ブロック", e);
+  });
+
   try {
     const res = await fetch("https://procon-e8vw.onrender.com/api/reset-game", {
       method: "POST",
