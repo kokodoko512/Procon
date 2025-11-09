@@ -1,6 +1,6 @@
 document.querySelector(".create-btn").addEventListener("click", async() => {
   const clickSound = new Audio("sound/btn.mp3");
-  clickSound.volume = 0.6;
+  clickSound.volume = 0.8;
   clickSound.play().catch((e) => {
     console.warn("サウンドの再生ブロック", e);
   });

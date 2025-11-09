@@ -97,6 +97,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("本物の人狼:", realWolf);
     const realWolfId = realWolf ? realWolf.player_id : null;
 
+    // 効果音再生
+    const clickSound = new Audio("sound/btn.mp3");
+    clickSound.volume = 0.8;
+    clickSound.play().catch((e) => {
+      console.warn("サウンドの再生ブロック", e);
+    });
     
     // 勝敗判定・遷移
     if (wolfId === realWolfId) {

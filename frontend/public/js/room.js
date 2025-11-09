@@ -91,6 +91,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    const clickSound = new Audio("sound/btn.mp3");
+    clickSound.volume = 0.8;
+    clickSound.play().catch(err => console.warn("音の再生ブロック:", err));
+
     const genre_id = document.getElementById("theme-select").value;
     if (!genre_id) {
       alert("ジャンルを選択してください");
