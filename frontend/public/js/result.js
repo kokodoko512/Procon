@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (player.wolf) {
         tr.style.backgroundColor = "rgb(138, 44, 44)";
+        tr.style.color = "white";
         tr.style.fontWeight = "bold";
       }
 
