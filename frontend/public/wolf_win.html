@@ -117,45 +117,46 @@
         from { opacity: 0; transform: scale(0.9); }
         to { opacity: 1; transform: scale(1); }
       }
+
       /* スマホ向け調整 */
-@media screen and (max-width: 600px) {
-  table {
-    width: 95%;
-    font-size: 0.85rem; /* 全体を少し小さく */
-    margin: 1rem auto;  
-  }
+      @media screen and (max-width: 600px) {
+        table {
+          width: 95%;
+          font-size: 0.85rem; /* 全体を少し小さく */
+          margin: 1rem auto;  
+        }
 
-  th, td {
-    padding: 2px; /* 余白を小さくしてコンパクトに */
-    white-space: normal; /* 改行を許可 */
-    overflow-wrap: anywhere; /* 長い単語も自然に折り返し */
-  }
+        th, td {
+          padding: 5px; /* 余白を小さくしてコンパクトに */
+          white-space: normal; /* 改行を許可 */
+          overflow-wrap: anywhere; /* 長い単語も自然に折り返し */
+        }
 
-  th:nth-child(1),
-  td:nth-child(1) { width: 18%; }  /* プレイヤー名 少し広く */
-  th:nth-child(2),
-  td:nth-child(2) { width: 47%; }  /* 曲名 少し短め */
-  th:nth-child(3),
-  td:nth-child(3) { width: 23%; }  /* テーマ */
-  th:nth-child(4),
-  td:nth-child(4) { width: 12%; }  /* 人狼 */
+        th:nth-child(1),
+        td:nth-child(1) { width: 18%; }  /* プレイヤー名 少し広く */
+        th:nth-child(2),
+        td:nth-child(2) { width: 47%; }  /* 曲名 少し短め */
+        th:nth-child(3),
+        td:nth-child(3) { width: 23%; }  /* テーマ */
+        th:nth-child(4),
+        td:nth-child(4) { width: 12%; }  /* 人狼 */
 
 
-  h1{
-    font-size: 3rem;
-  }
-  
+        h1{
+          font-size: 3rem;
+        }
+        
 
-  p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-  }
+        p {
+          font-size: 1.2rem;
+          line-height: 1.6;
+        }
 
-  .btn {
-    padding: 0.6rem 1.5rem;
-    font-size: 1rem;
-  }
-}
+        .btn {
+          padding: 0.6rem 1.5rem;
+          font-size: 1rem;
+        }
+      }
     </style>
   </head>
   <body>
