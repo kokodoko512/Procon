@@ -34,7 +34,7 @@ async function loadSongs() {
       div.innerHTML = `
         <img src="${s.album_image || `https://img.youtube.com/vi/${s.youtube_id}/mqdefault.jpg`}" 
             alt="thumbnail" width="120" height="90" style="margin-right:10px;vertical-align:middle;">
-        <strong>${s.title}</strong>（${s.player_name}さん）
+        <strong>${s.title}</strong>${s.player_name}さん
       `;
 
       // 個別再生ボタン

@@ -540,7 +540,7 @@ button:not(.create-btn)
   background-color: transparent;
   background-position: center;
   margin-top: 25px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   border: none;
   cursor: pointer;
   filter: drop-shadow(0 0 12px rgba(67, 151, 236, 0.607));
@@ -571,6 +571,7 @@ button:not(.create-btn)
     flex-direction: row;
     align-items: center;
     padding: 8px;
+    font-size: 0.85rem;
   }
 
   .song-item img {
@@ -585,7 +586,7 @@ button:not(.create-btn)
   }
 
   .song-item button {
-    padding: 6px 10px;
+    padding: 6px 7px;
     font-size: 0.8rem;
   }
 }
