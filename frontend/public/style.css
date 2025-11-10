@@ -511,7 +511,7 @@ h1 {
 #play-all-btn,
 #next-btn {
   display: block;
-  margin: 20px auto;
+  margin: 25px auto;
   background-color: hsl(198, 78%, 65%);
   border: none;
   color: white;
@@ -531,7 +531,7 @@ h1 {
 /* YouTubeプレイヤー */
 #player {
   width: 90%;
-  max-width: 640px;
+  max-width: 750px;
   aspect-ratio: 16 / 9;
   background: #000;
   border-radius: 12px;

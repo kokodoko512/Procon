@@ -6,8 +6,8 @@ let currentIndex = 0;
 // YouTubeプレイヤー準備
 function onYouTubeIframeAPIReady() {
   player = new YT.Player("player", {
-    height: "495",
-    width: "880",
+    height: "360",
+    width: "640",
     videoId: "",
     events: {
       onStateChange: onPlayerStateChange
