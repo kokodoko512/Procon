@@ -211,7 +211,7 @@ input[type="text"]:focus {
 }
 
 /* ボタン共通 */
-button:not(.create-btn):not(.action-btn):not(.count-btn):not(.help-button):not(#yes-btn):not(#finish-vote) { 
+button:not(.create-btn):not(.action-btn):not(.count-btn):not(.help-button):not(#yes-btn):not(#finish-vote):not(#next-btn) { 
   padding: 10px; 
   border: none; 
   border-radius: 4px; 
@@ -225,7 +225,7 @@ button:not(.create-btn):not(.action-btn):not(.count-btn):not(.help-button):not(#
   transition: all 0.3s ease;
   }
 
-button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):hover  {
+button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):not(#next-btn):hover  {
   background-color: #21a5f1;
   transform: translateY(-2px);
   box-shadow: 0 6px 13px rgba(42, 175, 228, 0.5);
