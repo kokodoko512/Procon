@@ -211,7 +211,7 @@ input[type="text"]:focus {
 }
 
 /* ボタン共通 */
-button:not(.create-btn):not(.action-btn):not(.count-btn):not(.help-button):not(#yes-btn):not(#finish-vote):not(#next-btn):not(.song-item button) { 
+button:not(.create-btn):not(.action-btn):not(.count-btn):not(.help-button):not(#yes-btn):not(#finish-vote):not(#next-btn):not(.song-item button):not(#play-all-btn) { 
   padding: 10px; 
   border: none; 
   border-radius: 4px; 
@@ -225,7 +225,7 @@ button:not(.create-btn):not(.action-btn):not(.count-btn):not(.help-button):not(#
   transition: all 0.3s ease;
   }
 
-button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):not(#next-btn):hover {
+button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):not(#next-btn):not(#play-all-btn):hover {
   background-color: #21a5f1;
   transform: translateY(-2px);
   box-shadow: 0 6px 13px rgba(42, 175, 228, 0.5);
@@ -515,6 +515,7 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):not(#ne
 
 #play-all-btn:hover {
   background-color: #21a5f1;
+  transform: translateY(-2px);
   box-shadow: 0 0 10px rgba(42, 175, 228, 0.6);
 }
 
@@ -528,7 +529,7 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):not(#ne
   background-color: transparent;
   background-position: center;
   margin-top: 25px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   border: none;
   cursor: pointer;
   filter: drop-shadow(0 0 12px rgba(67, 151, 236, 0.607));
@@ -574,8 +575,8 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):not(#ne
   }
 
   .song-item button {
-    padding: 6px 3px;
+    padding: 7px 6px;
     font-size: 0.8rem;
-    margin-left: 2px;
+    margin-left: 4px;
   }
 }
