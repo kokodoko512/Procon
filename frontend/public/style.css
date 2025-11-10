@@ -421,15 +421,6 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):hover  
   }
 }
 
-/* タイトル */
-h1 {
-  text-align: center;
-  font-size: 1.8rem;
-  margin-top: 1.5rem;
-  color: rgb(186, 240, 255);
-  text-shadow: 0 0 12px rgba(67, 151, 236, 0.8);
-}
-
 /* 現在再生中タイトル */
 #now-playing {
   text-align: center;
