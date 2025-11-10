@@ -211,7 +211,14 @@ input[type="text"]:focus {
 }
 
 /* ボタン共通 */
-button:not(.create-btn):not(.action-btn):not(.count-btn):not(.help-button):not(#yes-btn):not(#finish-vote):not(#next-btn) { 
+button:not(.create-btn)
+      :not(.action-btn)
+      :not(.count-btn)
+      :not(.help-button)
+      :not(#yes-btn)
+      :not(#finish-vote)
+      :not(#next-btn)
+      :not(.song-item button) { 
   padding: 10px; 
   border: none; 
   border-radius: 4px; 
@@ -225,7 +232,12 @@ button:not(.create-btn):not(.action-btn):not(.count-btn):not(.help-button):not(#
   transition: all 0.3s ease;
   }
 
-button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):not(#next-btn):hover  {
+button:not(.create-btn)
+      :not(.action-btn)
+      :not(#yes-btn)
+      :not(#finish-vote)
+      :not(#next-btn)
+      :hover  {
   background-color: #21a5f1;
   transform: translateY(-2px);
   box-shadow: 0 6px 13px rgba(42, 175, 228, 0.5);
@@ -502,7 +514,7 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):not(#ne
 #play-all-btn
 {
   display: block;
-  margin: 25px auto;
+  margin: 5px auto;
   background-color: hsl(198, 78%, 65%);
   border: none;
   color: white;
@@ -527,7 +539,8 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):not(#ne
   background-repeat: no-repeat;
   background-color: transparent;
   background-position: center;
-  margin-top: 40px;
+  margin-top: 25px;
+  margin-bottom: 10px;
   border: none;
   cursor: pointer;
   filter: drop-shadow(0 0 12px rgba(67, 151, 236, 0.607));
@@ -542,7 +555,7 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):not(#ne
 /* YouTubeプレイヤー */
 #player {
   width: 90%;
-  max-width: 330px;
+  max-width: 700px;
   height: auto;
   aspect-ratio: 16 / 9;
   background: #000;
