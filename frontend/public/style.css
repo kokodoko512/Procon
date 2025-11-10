@@ -520,8 +520,8 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):not(#ne
 
 /* 人狼当てへボタン */
 #next-btn {
-  width: 210px;
-  height: 90px;
+  width: 168px;
+  height: 72px;
   background-image: url("img/next.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -542,7 +542,8 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):not(#ne
 /* YouTubeプレイヤー */
 #player {
   width: 90%;
-  max-width: 700px;
+  max-width: 330px;
+  height: auto;
   aspect-ratio: 16 / 9;
   background: #000;
   border-radius: 12px;
@@ -560,7 +561,7 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):not(#ne
   }
 
   .song-item img {
-    width: 90px;
+    width: 60px;
     height: auto;
     margin-right: 10px;
   }
