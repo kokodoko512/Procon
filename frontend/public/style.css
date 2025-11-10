@@ -520,8 +520,8 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):not(#ne
 
 /* 人狼当てへボタン */
 #next-btn {
-  width: 182px;
-  height: 78px;
+  width: 210px;
+  height: 90px;
   background-image: url("img/next.png");
   background-size: contain;
   background-repeat: no-repeat;

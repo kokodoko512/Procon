@@ -89,5 +89,13 @@ document.getElementById("play-all-btn").addEventListener("click", () => {
 
 // 「人狼当てへ」ボタン押下時 vote.html へ遷移
 document.getElementById("next-btn").addEventListener("click", () => {
-  window.location.href = "vote.html";
+  const clickSound = new Audio("sound/btn.mp3");
+  clickSound.volume = 0.8;
+  clickSound.play().catch((e) => {
+    console.warn("サウンドの再生ブロック", e);
+  });
+  
+  setTimeout(() => {
+    window.location.href = "vote.html";
+  }, 500);
 });
