@@ -1,31 +1,38 @@
 let currentPlayer = null;
 let currentQuery = "";
-let offset = 0;
+let nextPageToken = "";
+const apiKey = "AIzaSyCkiZDUv6Pz9CPb2wiwUiyqtHqddFlm93Y"; // YouTubeAPIキー
 const limit = 10;
 
-// プレイヤー情報をAPIから取得して表示
+// プレイヤー情報取得→テーマ表示
 async function loadPlayer() {
     const urlParams = new URLSearchParams(window.location.search);
     const currentIndex = parseInt(urlParams.get("player")) || 0;
 
     try {
-        const res = await fetch("http://localhost:3000/api/players");
+        const res = await fetch("https://procon-e8vw.onrender.com/api/players");
         const players = await res.json();
         currentPlayer = players[currentIndex];
 
         if (!currentPlayer) {
-            alert("プレイヤー情報が見つかりません");
-            return null;
+        alert("プレイヤー情報が見つかりません");
+        return null;
         }
 
         const playerName = currentPlayer.name;
         const playerTheme = currentPlayer.theme_name || "テーマ未設定";
 
-        document.getElementById("theme").textContent =
-            `${playerName}さんのテーマは「${playerTheme}」です`;
+        document.getElementById("theme").innerHTML = `
+        ${playerName}さんのテーマは<br>
+        <span style="
+            font-size:1.5rem;
+            font-weight:bold;
+            color:#4db8ff;
+            text-shadow:0 0 10px rgba(77, 184, 255, 0.6);
+        ">「${playerTheme}」</span>
+        `;
 
         return currentPlayer;
-
     } catch (err) {
         console.error(err);
         alert("プレイヤー情報の取得に失敗しました");
@@ -33,92 +40,121 @@ async function loadPlayer() {
     }
 }
 
-// 曲検索＋表示
-async function fetchTracks() {
+// 動画検索
+async function fetchVideos(isLoadMore = false) {
     if (!currentPlayer) return;
+    const list = document.getElementById("search-results");
 
     try {
-        const response = await fetch(
-            `http://localhost:3000/api/spotify/search?q=${encodeURIComponent(currentQuery)}&limit=${limit}&offset=${offset}`
-        );
+        const url = new URL("https://www.googleapis.com/youtube/v3/search");
+        url.searchParams.set("part", "snippet");
+        url.searchParams.set("type", "video");
+        url.searchParams.set("q", currentQuery);
+        url.searchParams.set("maxResults", limit);
+        url.searchParams.set("key", apiKey);
+        if (isLoadMore && nextPageToken) {
+            url.searchParams.set("pageToken", nextPageToken);
+        }
 
-        const tracks = await response.json();
+        const response = await fetch(url);
+        const data = await response.json();
 
-        const list = document.getElementById("search-results");
+        if (!isLoadMore) list.innerHTML = "";
 
-        if (!tracks.length && offset === 0) {
-            list.innerHTML = "<p>該当する曲が見つかりませんでした。</p>";
+        if (!data.items || data.items.length === 0) {
+            if (!isLoadMore)
+            list.innerHTML = "<p>該当する動画が見つかりませんでした。</p>";
             document.getElementById("load-more").style.display = "none";
             return;
         }
 
-        tracks.forEach(track => {
+        data.items.forEach((video) => {
+            const videoId = video.id.videoId;
+            const title = video.snippet.title;
+            const thumbnail =
+                video.snippet.thumbnails.high?.url ||
+                video.snippet.thumbnails.medium?.url ||
+                video.snippet.thumbnails.default.url;
+
             const div = document.createElement("div");
             div.className = "track-item";
-            div.style.display = "flex";
-            div.style.alignItems = "center";
-            div.style.margin = "8px 0";
 
-            div.innerHTML = `
-                <img src="${track.album_image || ""}" alt="Album" class="album-img" style="width:60px; height:60px; margin-right:10px;">
-                <div style="flex:1;">
-                    <strong>${track.title}</strong><br>
-                    <span>${track.artist}</span>
-                </div>
-            `;
+            // サムネイル・タイトルコンテナ
+            const infoContainer = document.createElement("div");
+            infoContainer.className = "track-info";
+
+            const img = document.createElement("img");
+            img.src = thumbnail;
+            img.alt = "Thumbnail";
+
+            const titleDiv = document.createElement("div");
+            titleDiv.className = "track-title";
+            titleDiv.textContent = title;
+
+            infoContainer.appendChild(img);
+            infoContainer.appendChild(titleDiv);
 
             const button = document.createElement("button");
+            button.className = "select-btn";
             button.textContent = "選択";
+
+            // 曲選択処理
             button.addEventListener("click", async () => {
-                if (!confirm(`この曲を選択しますか？\n\n${track.title} - ${track.artist}`)) return;
+                if (!confirm(`この曲を選択しますか？\n\n${title}`)) return;
 
                 try {
-                    const res = await fetch("http://localhost:3000/api/spotify/register-song", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            player_id: currentPlayer.player_id,
-                            spotify_id: track.spotify_id
-                        })
-                    });
-
-                    const result = await res.json();
-
-                    if (res.ok) {
-                        alert("曲を登録しました！");
-                        // 次のプレイヤーへ
-                        const urlParams = new URLSearchParams(window.location.search);
-                        const nextIndex = parseInt(urlParams.get("player")) + 1;
-
-                        const playersRes = await fetch("http://localhost:3000/api/players");
-                        const players = await playersRes.json();
-
-                        if (nextIndex < players.length) {
-                            window.location.href = `check.html?player=${nextIndex}`;
-                        } else {
-                            window.location.href = "play.html";
-                        }
-
-                    } else {
-                        alert(result.error || "登録に失敗しました。");
+                const res = await fetch(
+                    "https://procon-e8vw.onrender.com/api/youtube/register-song",
+                    {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        player_id: currentPlayer.player_id,
+                        youtube_id: videoId,
+                        title: title,
+                        album_image: thumbnail,
+                    }),
                     }
+                );
 
+                const result = await res.json();
+
+                if (res.ok) {
+                    alert("曲を登録しました！");
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const nextIndex = parseInt(urlParams.get("player")) + 1;
+
+                    const playersRes = await fetch(
+                    "https://procon-e8vw.onrender.com/api/players"
+                    );
+                    const players = await playersRes.json();
+
+                    if (nextIndex < players.length) {
+                    window.location.href = `check.html?player=${nextIndex}`;
+                    } else {
+                    window.location.href = "play.html";
+                    }
+                } else {
+                    alert(result.error || "登録に失敗しました。");
+                }
                 } catch (err) {
-                    console.error(err);
-                    alert("曲登録中にエラーが発生しました");
+                console.error(err);
+                alert("曲登録中にエラーが発生しました");
                 }
             });
 
+            div.appendChild(infoContainer);
             div.appendChild(button);
             list.appendChild(div);
-        });
+            });
 
-        document.getElementById("load-more").style.display =
-            tracks.length < limit ? "none" : "block";
-
+        nextPageToken = data.nextPageToken || "";
+        document.getElementById("load-more").style.display = nextPageToken
+        ? "block"
+        : "none";
     } catch (err) {
         console.error(err);
-        alert("曲検索中にエラーが発生しました");
+        alert("動画検索中にエラーが発生しました");
     }
 }
 
@@ -128,18 +164,15 @@ document.getElementById("search-btn").addEventListener("click", async () => {
     if (!query) return alert("検索ワードを入力してください");
 
     currentQuery = query;
-    offset = 0;
-    document.getElementById("search-results").innerHTML = "";
-
+    nextPageToken = "";
     await loadPlayer();
-    await fetchTracks();
+    await fetchVideos(false);
 });
 
 // もっと見るボタン
 document.getElementById("load-more").addEventListener("click", async () => {
-    offset += limit;
-    await fetchTracks();
+    await fetchVideos(true);
 });
 
-// 初期ロード時にプレイヤー情報だけ取得
+// 初期ロード
 loadPlayer();

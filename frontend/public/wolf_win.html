@@ -1,123 +1,184 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>人狼の勝利！</title>
-  <style>
-    body {
-      background: radial-gradient(circle at center, #1a0000 0%, #000000 100%);
-      font-family: "Noto Sans JP", sans-serif;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      text-align: center;
-      animation: fadeIn 1.2s ease-in-out;
-    }
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人狼の勝利！</title>
+    <style>
+      body {
+        /* 赤黒系の背景 */
+        background: radial-gradient(circle at center, #4d0000 0%, #000000 100%);
+        font-family: "Noto Sans JP", sans-serif;
+        color: #111;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        text-align: center;
+        animation: fadeIn 1.2s ease-in-out;
+        position: relative;
+        overflow: hidden;
+      }
 
-    .emoji {
-      font-size: 5rem;
-      margin-top: 2rem;
-      animation: pulse 1.8s ease-in-out infinite;
-    }
+      /* 背景に半透明のオオカミ画像を配置 */
+      body::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("img/wolf1.png");
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        background-size: 45%;
+        opacity: 0.25;
+        z-index: 0;
+      }
 
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.1); opacity: 0.8; }
-    }
+      h1, p, table, .btn {
+        position: relative;
+        z-index: 1; /* 背景より前に表示 */
+      }
 
-    h1 {
-      font-size: 3rem;
-      margin: 1rem 0 0.5rem 0;
-      color: #ff4d4d;
-      text-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
-    }
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.1); opacity: 0.8; }
+      }
 
-    p {
-      font-size: 1.3rem;
-      margin-bottom: 2rem;
-      color: #f2f2f2;
-    }
+      h1 {
+        font-size: 3rem;
+        margin: 1rem 0 0.5rem 0;
+        color: #990000;
+        text-shadow: 0 0 12px rgba(255, 0, 0, 0.4);
+      }
 
-    table {
-      width: 90%;
-      max-width: 700px;
-      margin: 0 auto 2rem auto;
-      border-collapse: collapse;
-      text-align: center;
-      background-color: rgba(0,0,0,0.6);
-      overflow: hidden;
-      box-shadow: 0 0 15px rgba(255,0,0,0.4);
-    }
+      p {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        color: #ff9999; /* 少し赤みを帯びた白 */
+        text-shadow: 0 0 10px rgba(255, 50, 50, 0.4); /* 柔らかい赤の発光効果 */
+      }
 
-    th, td {
-      border: 1px solid #ff4d4d;
-      padding: 12px;
-      font-size: 1rem;
-    }
 
-    th {
-      background-color: rgba(255, 0, 0, 0.7);
-    }
+      table {
+        width: 90%;
+        max-width: 700px;
+        margin: 0 auto 2rem auto;
+        border-collapse: collapse;
+        text-align: center;
+        background-color: rgba(255,255,255,0.7);
+        overflow: hidden;
+        box-shadow: 0 0 15px rgba(255,0,0,0.4);
+        table-layout: fixed;
+      }
 
-    tbody tr:nth-child(even) {
-      background-color: rgba(255, 255, 255, 0.05);
-    }
+      th, td {
+        padding: 12px;
+        font-size: 0.7rem;
+        color: #ececec;
+      }
 
-    tbody tr:hover {
-      background-color: rgba(255, 255, 255, 0.15);
-    }
+      th {
+        background-color: rgba(179, 0, 0, 0.8);
+        color: #fff;
+      }
 
-    .btn {
-      background-color: #ff4d4d;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      padding: 0.8rem 2rem;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
-      margin-bottom: 2rem;
-    }
+      /* 列幅調整 */
+      th:nth-child(1), td:nth-child(1) { width: 13%; }
+      th:nth-child(2), td:nth-child(2) { width: 55%; }
+      th:nth-child(3), td:nth-child(3) { width: 20%; }
+      th:nth-child(4), td:nth-child(4) { width: 12%; }
 
-    .btn:hover {
-      background-color: #cc0000;
-      transform: translateY(-2px);
-    }
+      tbody tr {
+        background-color: rgba(90, 90, 90);
+      }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
-  </style>
-</head>
-<body>
-  <div class="emoji">🐺</div>
-  <h1>人狼の勝利！</h1>
-  <p>人狼が最後まで正体を隠し通しました…</p>
+      .btn {
+        width: 204px;
+        height: 52px;
+        margin-top: 30px;
+        background-image: url("img/restart-wolf.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        filter: drop-shadow(rgba(255, 0, 0, 0.4));
+        transition: all 0.3s ease;
+      }
 
-  <table>
-    <thead>
-      <tr>
-        <th>プレイヤー名</th>
-        <th>選んだ曲名</th>
-        <th>テーマ</th>
-        <th>人狼</th>
-      </tr>
-    </thead>
-    <tbody id="players-result">
-      <!-- result.jsで生成 -->
-    </tbody>
-  </table>
+      .btn:hover {
+        transform: translateY(-3px);
+        filter: drop-shadow(0 0 20px rgba(175, 0, 0, 0.8));
+      }
 
-  <button class="btn" onclick="restartGame()">もう一度プレイする</button>
+      @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+      }
 
-  <script src="js/result.js"></script>
-</body>
+      /* スマホ向け調整 */
+      @media screen and (max-width: 600px) {
+        table {
+          width: 95%;
+          font-size: 0.85rem; /* 全体を少し小さく */
+          margin: 1rem auto;  
+        }
+
+        th, td {
+          padding: 5px; /* 余白を小さくしてコンパクトに */
+          white-space: normal; /* 改行を許可 */
+          overflow-wrap: anywhere; /* 長い単語も自然に折り返し */
+        }
+
+        th:nth-child(1),
+        td:nth-child(1) { width: 18%; }  /* プレイヤー名 少し広く */
+        th:nth-child(2),
+        td:nth-child(2) { width: 47%; }  /* 曲名 少し短め */
+        th:nth-child(3),
+        td:nth-child(3) { width: 23%; }  /* テーマ */
+        th:nth-child(4),
+        td:nth-child(4) { width: 12%; }  /* 人狼 */
+
+
+        h1{
+          font-size: 3rem;
+        }
+        
+
+        p {
+          font-size: 1.2rem;
+          line-height: 1.6;
+        }
+
+        .btn {
+          padding: 0.6rem 1.5rem;
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>人狼の勝利！</h1>
+    <p>人狼が最後まで正体を隠し通しました…</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>プレイヤー名</th>
+          <th>選んだ曲名</th>
+          <th>テーマ</th>
+          <th>人狼</th>
+        </tr>
+      </thead>
+      <tbody id="players-result">
+        <!-- result.jsで生成 -->
+      </tbody>
+    </table>
+
+    <button class="btn" onclick="restartGame()"></button>
+
+    <script src="js/result.js"></script>
+  </body>
 </html>

@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: "Noto Sans JP", sans-serif;
-  background: linear-gradient(135deg, #111, #333);
+  background: #5b5b5b;
   color: white;
   min-height: 100vh;
   display: flex;
@@ -13,10 +13,15 @@ body {
 
 /* タイトル */
 h1 {
-  margin: 60px 0 40px; /* 上40px→60px、下20px→40pxに調整して距離確保 */
-  font-size: 3rem;
-  color: #ff6b6b;
-  text-shadow: 0 0 12px rgba(255, 107, 107, 0.7);
+  margin: 50px 0 20px;
+  font-size: 2rem;
+  color: rgb(186, 240, 255);
+  text-shadow: 0 0 12px rgba(50, 161, 202, 0.947);
+}
+
+/* 画像 */
+.img {
+  padding-top: 15px;
 }
 
 /* ルーム作成ボタン */
@@ -24,30 +29,26 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 140px); /* タイトル分マージン調整 */
+  height: calc(100vh - 600px); /* タイトル分マージン調整 */
 }
 
 .create-btn {
-  padding: 20px 40px;       /* 以前より大きく */
-  font-size: 2rem;          /* フォントサイズアップ */
-  border-radius: 16px;      /* 角丸を少し大きく */
-  background-color: #ff4757; /* 鮮やかレッドに変更 */
-  color: white;             /* 文字を白に */
+  width: 240px;
+  height: 92px;
+  margin-top: 20px;
+  background-image: url("img/create-btn.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
   border: none;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(255, 71, 87, 0.5);
+  filter: drop-shadow(0 0 12px rgba(67, 151, 236, 0.607));
   transition: all 0.3s ease;
 }
 
 .create-btn:hover {
-  background-color: #ff2e44;
-  transform: translateY(-4px); /* 少し浮き上がる感じ */
-  box-shadow: 0 10px 25px rgba(255, 46, 68, 0.6);
-}
-
-.create-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
+  filter: drop-shadow(0 0 18px rgba(117, 216, 255, 0.8));
 }
 
 /* 入力欄 */
@@ -63,8 +64,8 @@ input[type="text"]{
 }
 
 input[type="text"]:focus {
-  border-color: #ff6b6b;
-  box-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+  border-color: #6bdcff;
+  box-shadow: 0 0 5px rgba(107, 243, 255, 0.5);
 }
 
 /* 戻るリンク */
@@ -79,6 +80,73 @@ input[type="text"]:focus {
 }
 .back-link:hover {
   text-decoration: underline;
+}
+
+/* ジャンル選択 */
+#theme-select {
+  background-color: hsl(0, 0%, 91%);
+  color: #7f7f7f;
+  font-size: 14px;
+  padding: 4px;
+}
+
+/* ゲーム開始ボタン */
+.action-btn {
+  width: 168px;
+  height: 72px;
+  background-image: url("img/actions.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+  filter: drop-shadow(0 0 12px rgba(67, 151, 236, 0.607));
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.action-btn:hover {
+  transform: translateY(-3px);
+  filter: drop-shadow(0 0 16px rgba(117, 216, 255, 0.7));
+}
+
+/* ＋−ボタン */
+.count-btn {
+  padding: 10px;
+  margin-left: 3px;
+  margin-right: 3px;
+  border: none; 
+  border-radius: 4px; 
+  top: 14px;
+  cursor: pointer; 
+  background: hsl(198, 78%, 65%);
+  font-size: 10px; 
+  color: white; /* 文字色 */ 
+  font-family: "fantasy"; /* 字体 */
+  font-weight: bold; 
+  transition: all 0.3s ease;
+}
+
+/* 確認画面 */
+#yes-btn {
+  width: 100px;
+  height: 50px;
+  background-image: url("img/yes.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+  filter: drop-shadow(0 0 12px rgba(67, 151, 236, 0.607));
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+#yes-btn:hover {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 16px rgba(117, 216, 255, 0.8));
 }
 
 /* 投票行 */
@@ -102,38 +170,413 @@ input[type="text"]:focus {
   font-size: 1.1rem;
 }
 
-/* ＋−ボタン */
-button[data-action="increase"],
-button[data-action="decrease"] {
-  font-size: 10px;
-  background: #ff6b6b;
-  color: #111;
+/* 投票+-ボタン */
+.increase,
+.decrease {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  background: hsl(198, 78%, 65%);
+  color: white;
+  cursor: pointer;
+  filter: drop-shadow(0 0 12px rgba(67, 151, 236, 0.607));
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-
-button { 
-    padding: 10px; 
-    border: none; 
-    border-radius: 4px; 
-    top: 14px;
-    cursor: pointer; 
-    background: #e55b5b; 
-    color: white; /* ← 文字色 */ 
-    font-family: "fantasy"; /* ← 字体 */ 
-    font-size: 18px; /* ← 文字の大きさ */ 
-    font-weight: bold; 
-    transition: all 0.3s ease;
+/* 決定ボタン */
+#finish-vote {
+  width: 140px;
+  height: 60px;
+  background-image: url("img/finish.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center;
+  margin-top: 20px;
+  border: none;
+  cursor: pointer;
+  filter: drop-shadow(0 0 12px rgba(67, 151, 236, 0.607));
+  transition: all 0.3s ease;
 }
 
-button:hover {
-  background-color: #ff2e44;
-  transform: translateY(-2px); /* 少し浮き上がる感じ */
-  box-shadow: 0 10px 25px rgba(255, 46, 68, 0.6);
+#finish-vote:hover {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 14px rgba(117, 216, 255, 0.75));
 }
 
+/* ボタン共通 */
+button:not(.create-btn):not(.action-btn):not(.count-btn):not(.help-button):not(#yes-btn):not(#finish-vote):not(#next-btn):not(.song-item button):not(#play-all-btn) { 
+  padding: 10px; 
+  border: none; 
+  border-radius: 4px; 
+  top: 14px;
+  cursor: pointer; 
+  background: hsl(198, 78%, 65%);
+  font-size: 18px; 
+  color: white; /* 文字色 */ 
+  font-family: "fantasy"; /* 字体 */
+  font-weight: bold; 
+  transition: all 0.3s ease;
+  }
 
-.actions {
-  margin-top: 40px; /* 👈 ここで距離を調整 */
-  margin-bottom: 60px; /* 👈 下にも余白を追加 */
+button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):not(#next-btn):not(#play-all-btn):hover {
+  background-color: #21a5f1;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 13px rgba(42, 175, 228, 0.5);
+} 
+
+/* スマホ対応 (横幅600px以下) */
+@media screen and (max-width: 600px) {
+  .img {
+    width: 90%;
+    margin-top: 15vh;
+  }
+
+  .help-bubble {
+    width: 80%;
+    font-size: 0.85rem;
+  }
+  .help-button {
+    width: 26px;
+    height: 26px;
+    font-size: 0.9rem;
+  }
+}
+
+.genre-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* ヘルプボタン */
+.help-button {
+  background-color: hsl(198, 78%, 65%);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 1rem;
+  margin-left: 8px;
+  cursor: pointer;
+  transition: 0.2s;
   text-align: center;
+  line-height: 28px;
+  padding: 0;
+}
+
+.help-button:hover {
+  background-color: #0088cc;
+}
+
+/* 吹き出し本体 */
+.help-bubble {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, 10px);
+  background-color: #ffffff;
+  color: #333;
+  border-radius: 8px;
+  padding: 10px 14px;
+  width: 230px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  text-align: left;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* 吹き出しの三角 */
+.help-bubble::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent #ffffff transparent;
+}
+
+/* 表示時のアニメーション */
+.help-bubble.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}
+
+#theme{
+  text-align: center;
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+
+#search-btn{
+  margin-top: 2rem;
+}
+
+#search-results {
+  width: 90%;
+  max-width: 700px;
+  margin: 1rem auto 2rem auto;
+}
+
+/* 各曲の行レイアウト */
+.track-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 8px auto;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+  transition: background 0.2s ease;
+}
+
+.track-item:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* サムネイル・タイトル */
+.track-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* サムネイル画像 */
+.track-item img {
+  width: auto;
+  height: 100px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+/* タイトル */
+.track-title {
+  color: #e5f6ff;
+  font-size: 0.95rem;
+  font-family: sans-serif;
+  text-align: left;
+  white-space: normal;
+  word-break: break-word;
+  overflow: visible;
+  font-style: bold;
+}
+
+/* 選択ボタン */
+.select-btn {
+  background-color: hsl(198, 78%, 65%);
+  border: none;
+  color: white;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-left: 3px;
+}
+
+.select-btn:hover {
+  background-color: #21a5f1;
+  box-shadow: 0 0 8px rgba(42, 175, 228, 0.6);
+}
+
+/* スマホ */
+@media screen and (max-width: 600px) {
+  .track-item {
+    flex-direction: row;
+    align-items: center;
+    padding: 8px;
+  }
+
+  .track-info img {
+    width: auto;
+    height: 50px;
+  }
+
+  .track-title {
+    font-size: 0.85rem;
+    line-height: 1.3;
+  }
+
+  .select-btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+}
+
+/* 現在再生中タイトル */
+#now-playing {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #e5f6ff;
+}
+
+/* 曲一覧コンテナ */
+#song-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 700px;
+}
+
+/* 各曲アイテム */
+.song-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 10px 14px;
+  transition: background 0.2s ease;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+.song-item:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* サムネイル画像 */
+.song-item img {
+  width: 140px;
+  height: auto;
+  border-radius: 6px;
+  margin-right: 14px;
+  object-fit: cover;
+}
+
+/* 曲タイトルと投稿者名 */
+.song-item strong {
+  color: #e5f6ff;
+  font-size: 1rem;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
+}
+
+.song-item span {
+  color: #aee2ff;
+  font-size: 0.9rem;
+}
+
+/* 再生ボタン */
+.song-item button {
+  background-color: hsl(198, 78%, 65%);
+  border: none;
+  color: white;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.song-item button:hover {
+  background-color: #21a5f1;
+  box-shadow: 0 0 8px rgba(42, 175, 228, 0.6);
+}
+
+/* 全曲再生ボタン */
+#play-all-btn
+{
+  display: block;
+  margin: 5px auto;
+  background-color: hsl(198, 78%, 65%);
+  border: none;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#play-all-btn:hover {
+  background-color: #21a5f1;
+  transform: translateY(-2px);
+  box-shadow: 0 0 10px rgba(42, 175, 228, 0.6);
+}
+
+/* 人狼当てへボタン */
+#next-btn {
+  width: 168px;
+  height: 72px;
+  background-image: url("img/next.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  border: none;
+  cursor: pointer;
+  filter: drop-shadow(0 0 12px rgba(67, 151, 236, 0.607));
+  transition: all 0.3s ease;
+}
+
+#next-btn:hover {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 14px rgba(117, 216, 255, 0.75));
+}
+
+/* YouTubeプレイヤー */
+#player {
+  width: 90%;
+  max-width: 700px;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: 0 0 12px rgba(67, 151, 236, 0.4);
+}
+
+/* スマホ対応 */
+@media screen and (max-width: 600px) {
+  .song-item {
+    flex-direction: row;
+    align-items: center;
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+
+  .song-item img {
+    width: 60px;
+    height: auto;
+    margin-right: 10px;
+  }
+
+  .song-item strong {
+    max-width: 120px;
+    font-size: 0.85rem;
+  }
+
+  .song-item button {
+    padding: 7px 6px;
+    font-size: 0.8rem;
+    margin-left: 4px;
+  }
 }

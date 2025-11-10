@@ -1,14 +1,17 @@
-const mysql = require('mysql2/promise');
+import mysql from "mysql2/promise";
+import dotenv from "dotenv";
 
-// DB接続設定
+dotenv.config();
+
 const pool = mysql.createPool({
-    host: '192.168.10.3',
-    user: 'user556',      // ユーザー名
-    password: '0922', // パスワード
-    database: 'mw',     // 使用するデータベース名
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT || 3306,
+    ssl: {
+        rejectUnauthorized: false, // SSL証明書を検証
+    },
 });
 
-module.exports = pool;
+export default pool;

@@ -1,12 +1,12 @@
 let currentPlayer = null;
-let currentIndex = 0; // ←グローバルに宣言
+let currentIndex = 0;
 
 async function loadCurrentPlayer() {
     const urlParams = new URLSearchParams(window.location.search);
-    currentIndex = parseInt(urlParams.get("player")) || 0; // ←ここで代入
+    currentIndex = parseInt(urlParams.get("player")) || 0;
 
     try {
-        const res = await fetch("http://localhost:3000/api/players");
+        const res = await fetch("https://procon-e8vw.onrender.com/api/players");
         const players = await res.json();
 
         currentPlayer = players[currentIndex];
@@ -23,7 +23,7 @@ async function loadCurrentPlayer() {
 
     } catch (err) {
         console.error(err);
-        alert("プレイヤー情報の取得に失敗しました");
+        alert("プレイヤー情報取得失敗");
         return [];
     }
 }
@@ -33,7 +33,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     if(!currentPlayer) return;
 });
 
-document.getElementById("yes-button").addEventListener("click", () => {
-    // currentIndex はグローバルなのでここで使える
-    window.location.href = `select.html?player=${currentIndex}`;
+document.getElementById("yes-btn").addEventListener("click", () => {
+    const clickSound = new Audio("sound/btn.mp3");
+    clickSound.volume = 0.8;
+    clickSound.play().catch((e) => {
+        console.warn("サウンドの再生ブロック", e);
+    });
+    
+    setTimeout(() => {
+        window.location.href = `select.html?player=${currentIndex}`;
+    }, 700);
 });
