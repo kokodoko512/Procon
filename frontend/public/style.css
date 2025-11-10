@@ -458,7 +458,7 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):not(#ne
 
 /* サムネイル画像 */
 .song-item img {
-  width: 140px;
+  width: 120px;
   height: auto;
   border-radius: 6px;
   margin-right: 14px;
