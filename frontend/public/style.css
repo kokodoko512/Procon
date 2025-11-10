@@ -467,8 +467,8 @@ h1 {
 
 /* サムネイル画像 */
 .song-item img {
-  width: 140px;        /* 自然な大きさ */
-  height: auto;        /* 縦横比を保持 */
+  width: 140px;
+  height: auto;
   border-radius: 6px;
   margin-right: 14px;
   object-fit: cover;
@@ -531,7 +531,7 @@ h1 {
 /* YouTubeプレイヤー */
 #player {
   width: 90%;
-  max-width: 750px;
+  max-width: 700px;
   aspect-ratio: 16 / 9;
   background: #000;
   border-radius: 12px;
