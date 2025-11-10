@@ -42,5 +42,5 @@ document.getElementById("yes-btn").addEventListener("click", () => {
     
     setTimeout(() => {
         window.location.href = `select.html?player=${currentIndex}`;
-    }, 500);
+    }, 700);
 });

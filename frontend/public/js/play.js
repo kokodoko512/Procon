@@ -97,5 +97,5 @@ document.getElementById("next-btn").addEventListener("click", () => {
   
   setTimeout(() => {
     window.location.href = "vote.html";
-  }, 500);
+  }, 700);
 });

@@ -24,7 +24,7 @@ document.querySelector(".create-btn").addEventListener("click", async() => {
     // room.htmlに遷移
     setTimeout(() => {
       window.location.href = "room.html";
-    }, 500);
+    }, 700);
 
   } catch (error) {
     console.error("初期化失敗:", error);
