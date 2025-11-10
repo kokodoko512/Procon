@@ -574,7 +574,8 @@ button:not(.create-btn):not(.action-btn):not(#yes-btn):not(#finish-vote):not(#ne
   }
 
   .song-item button {
-    padding: 6px 7px;
+    padding: 6px 3px;
     font-size: 0.8rem;
+    margin-left: 2px;
   }
 }

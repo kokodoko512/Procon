@@ -39,7 +39,7 @@ async function loadSongs() {
 
       // 個別再生ボタン
       const btn = document.createElement("button");
-      btn.textContent = "この曲を再生";
+      btn.textContent = "再生";
       btn.addEventListener("click", () => playSong(index));
       div.appendChild(btn);
 
